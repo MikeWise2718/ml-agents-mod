@@ -1,1 +1,1 @@
-mlagents-learn config/trainer_config.yaml --train --run-id=test01
+mlagents-learn config/trainer_config.yaml --train --run-id=test02 
