@@ -396,6 +396,8 @@ def main():
             "It is not possible to launch more than one concurrent training session "
             "when training from the editor."
         )
+    print("trainer_logger.getEffectiveLevel() is:{}".format(trainer_logger.getEffectiveLevel()))
+    print("50=Critical,40=Error,30=Warning,20=Info,10=Debug")
 
     jobs = []
     run_seed = options.seed
