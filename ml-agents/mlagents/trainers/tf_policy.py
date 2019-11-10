@@ -209,7 +209,7 @@ class TFPolicy(Policy):
         with self.graph.as_default():
             last_checkpoint = self.model_path + "/model-" + str(steps) + ".cptk"
             self.saver.save(self.sess, last_checkpoint)
-            tf.train.write_graph(
+            tf.io.write_graph(
                 self.graph, self.model_path, "raw_graph_def.pb", as_text=False
             )
 
@@ -221,7 +221,7 @@ class TFPolicy(Policy):
         with self.graph.as_default():
             target_nodes = ",".join(self._process_graph())
             graph_def = self.graph.as_graph_def()
-            output_graph_def = graph_util.convert_variables_to_constants(
+            output_graph_def = tf.compat.v1.graph_util.convert_variables_to_constants(
                 self.sess, graph_def, target_nodes.replace(" ", "").split(",")
             )
             frozen_graph_def_path = self.model_path + "/frozen_graph_def.pb"

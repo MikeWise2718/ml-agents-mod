@@ -56,7 +56,7 @@ class Trainer(object):
         self.trainer_metrics = TrainerMetrics(
             path=self.summary_path + ".csv", brain_name=self.brain_name
         )
-        self.summary_writer = tf.summary.FileWriter(self.summary_path)
+        self.summary_writer = tf.compat.v1.summary.FileWriter(self.summary_path)
         self._reward_buffer: Deque[float] = deque(maxlen=reward_buff_cap)
         self.policy: TFPolicy = None
         self.step: int = 0
@@ -201,7 +201,7 @@ class Trainer(object):
                         self.run_id, self.brain_name, step, is_training
                     )
                 )
-            summary = tf.Summary()
+            summary = tf.compat.v1.Summary()
             for key in self.stats:
                 if len(self.stats[key]) > 0:
                     stat_mean = float(np.mean(self.stats[key]))
@@ -220,7 +220,7 @@ class Trainer(object):
         """
         try:
             with tf.Session() as sess:
-                s_op = tf.summary.text(
+                s_op = tf.compat.v1.summary.text(
                     key,
                     tf.convert_to_tensor(
                         ([[str(x), str(input_dict[x])] for x in input_dict])

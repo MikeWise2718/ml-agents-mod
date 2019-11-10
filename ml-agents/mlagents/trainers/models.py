@@ -92,10 +92,10 @@ class LearningModel(object):
         global_step = tf.Variable(
             0, name="global_step", trainable=False, dtype=tf.int32
         )
-        steps_to_increment = tf.placeholder(
+        steps_to_increment = tf.compat.v1.placeholder(
             shape=[], dtype=tf.int32, name="steps_to_increment"
         )
-        increment_step = tf.assign(global_step, tf.add(global_step, steps_to_increment))
+        increment_step = tf.compat.v1.assign(global_step, tf.add(global_step, steps_to_increment))
         return global_step, increment_step, steps_to_increment
 
     @staticmethod
@@ -108,7 +108,7 @@ class LearningModel(object):
         if lr_schedule == LearningRateSchedule.CONSTANT:
             learning_rate = tf.Variable(lr)
         elif lr_schedule == LearningRateSchedule.LINEAR:
-            learning_rate = tf.train.polynomial_decay(
+            learning_rate = tf.compat.v1.train.polynomial_decay(
                 lr, global_step, max_step, 1e-10, power=1.0
             )
         else:
@@ -444,7 +444,7 @@ class LearningModel(object):
         ]
         output = tf.concat(
             [
-                tf.multinomial(tf.log(normalized_probs[k] + EPSILON), 1)
+                tf.multinomial(tf.math.log(normalized_probs[k] + EPSILON), 1)
                 for k in range(len(action_size))
             ],
             axis=1,

@@ -1,3 +1,9 @@
+try:
+    from tensorflow.python.util import module_wrapper as deprecation
+except ImportError:
+    from tensorflow.python.util import deprecation_wrapper as deprecation
+deprecation._PER_MODULE_WARNING_LIMIT = 0
+
 # # Unity ML-Agents Toolkit
 import logging
 import argparse
@@ -11,7 +17,8 @@ import numpy as np
 from typing import Any, Callable, Optional, List, NamedTuple
 
 
-from mlagents.trainers.trainer_controller import TrainerController
+# from mlagents.trainers.trainer_controller import TrainerController
+from trainer_controller import TrainerController
 from mlagents.trainers.exception import TrainerError
 from mlagents.trainers.meta_curriculum import MetaCurriculum
 from mlagents.trainers.trainer_util import load_config, TrainerFactory
@@ -24,6 +31,7 @@ from mlagents.envs.subprocess_env_manager import SubprocessEnvManager
 
 class CommandLineOptions(NamedTuple):
     debug: bool
+    info: bool
     num_runs: int
     seed: int
     env_path: str
@@ -143,6 +151,12 @@ def parse_command_line(argv: Optional[List[str]] = None) -> CommandLineOptions:
         default=False,
         action="store_true",
         help="Whether to run ML-Agents in debug mode with detailed logging",
+    )
+    parser.add_argument(
+        "--info",
+        default=False,
+        action="store_true",
+        help="Whether to run ML-Agents in info mode with informational logging",
     )
     parser.add_argument(
         "--multi-gpu",
@@ -388,6 +402,9 @@ def main():
     trainer_logger = logging.getLogger("mlagents.trainers")
     env_logger = logging.getLogger("mlagents.envs")
     trainer_logger.info(options)
+    if options.info:
+        trainer_logger.setLevel("INFO")
+        env_logger.setLevel("INFO")    
     if options.debug:
         trainer_logger.setLevel("DEBUG")
         env_logger.setLevel("DEBUG")
@@ -398,6 +415,8 @@ def main():
         )
     print("trainer_logger.getEffectiveLevel() is:{}".format(trainer_logger.getEffectiveLevel()))
     print("50=Critical,40=Error,30=Warning,20=Info,10=Debug")
+
+
 
     jobs = []
     run_seed = options.seed
