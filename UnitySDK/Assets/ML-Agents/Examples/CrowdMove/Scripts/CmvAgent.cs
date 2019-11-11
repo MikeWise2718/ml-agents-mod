@@ -37,7 +37,7 @@ public class CmvAgent : Agent
         this.cmvAgMan = cmvAgMan;
 
         // Initialize agent parameters
-       // brain = cmvAgMan.brain;
+        //brain = cmvAgMan.brain;
         area = cmvAgMan.area;
         ground = cmvAgMan.ground;
         redGoal = cmvAgMan.redGoal;
@@ -75,7 +75,7 @@ public class CmvAgent : Agent
         groundMaterial = groundRenderer.material;
         nmoves = 0;
         cmvagbod.InitializeAgentBody();
-        //Debug.Log("Initialized agent " + area.name + ":" + name + " maxStep:" + agentParameters.maxStep);
+        Debug.Log("Initialized agent " + area.name + ":" + name + " maxStep:" + agentParameters.maxStep);
     }
 
     public void CrowdManInit()
@@ -98,7 +98,7 @@ public class CmvAgent : Agent
         {
             otherAgents.Remove(agent);
         }
-        //Debug.Log("Agent " + name + " has " + otherAgents.Count + " neighbors");
+        Debug.Log("FindOtherAgents - Agent " + name + " has " + otherAgents.Count + " neighbors");
         var aglist = "";
         var ln = otherAgents.Count;
         foreach(var ag in otherAgents)
@@ -109,10 +109,11 @@ public class CmvAgent : Agent
                 aglist += ",";
             }
         }
-        //Debug.Log("otherAgents:"+aglist);
+        Debug.Log("otherAgents:"+aglist);
     }
     public override void CollectObservations()
     {
+        Debug.Log("Collecting observations for " + name + " useVectorobs:" + useVectorObs);
         if (useVectorObs)
         {
             AddVectorObs(GetStepCount() / (float)agentParameters.maxStep);

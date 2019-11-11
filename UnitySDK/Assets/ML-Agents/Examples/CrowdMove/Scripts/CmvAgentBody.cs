@@ -153,6 +153,10 @@ public class CmvAgentBody : MonoBehaviour
         {
             rpi = new RayPerceptionInterpreter(name, rayDistance, rayAngles, detectableObjects);
         }
+        if (rayPer==null)
+        {
+            InitializeAgentBody();
+        }
         var rayobs = rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0,0);
         rpi.Perceive(rayobs);
         return rayobs;
