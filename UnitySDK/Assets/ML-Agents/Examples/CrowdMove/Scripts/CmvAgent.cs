@@ -56,6 +56,8 @@ public class CmvAgent : Agent
         var bp = bhp.brainParameters;
         bp.vectorActionSpaceType = SpaceType.Continuous;
         bp.vectorObservationSize = 36;
+        bp.vectorActionSize = new int[] { 2 };
+        bp.vectorActionDescriptions = new string[] { "action1", "action2" };
         this.sType = bp.vectorActionSpaceType;
 
 
