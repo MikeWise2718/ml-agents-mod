@@ -11,13 +11,17 @@ namespace MLAgents
     public class BehaviorParameters : MonoBehaviour
     {
 
-        [HideInInspector]
+//        [HideInInspector]
         [SerializeField]
-        private BrainParameters m_BrainParameters = new BrainParameters();
-        [HideInInspector] [SerializeField] private NNModel m_Model;
-        [HideInInspector] [SerializeField] private InferenceDevice m_InferenceDevice;
-        [HideInInspector] [SerializeField] private bool m_UseHeuristic;
-        [HideInInspector] [SerializeField] private string m_BehaviorName = "My Behavior";
+        public BrainParameters m_BrainParameters = new BrainParameters();
+//        [HideInInspector]
+        [SerializeField] public NNModel m_Model;
+//        [HideInInspector]
+        [SerializeField] public InferenceDevice m_InferenceDevice;
+//        [HideInInspector]
+        [SerializeField] public bool m_UseHeuristic;
+//        [HideInInspector]
+        [SerializeField] public string m_BehaviorName = "My Behavior";
 
         [HideInInspector]
         public BrainParameters brainParameters

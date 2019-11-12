@@ -312,7 +312,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 076ea380b3b0a5043a2a689676e387f2, type: 3}
@@ -571,25 +571,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c077150ed7fe2b841ac639adaa01eb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  broadcastHub:
-    broadcastingBrains:
-    - {fileID: 11400000, guid: 236ae93d31be61e42944f27d75eb3887, type: 2}
-    _brainsToControl: []
-  maxSteps: 0
-  trainingConfiguration:
+  m_TrainingConfiguration:
     width: 80
     height: 80
     qualityLevel: 1
     timeScale: 100
     targetFrameRate: -1
-  inferenceConfiguration:
+  m_InferenceConfiguration:
     width: 1280
     height: 720
     qualityLevel: 5
     timeScale: 1
     targetFrameRate: 60
   resetParameters:
-    resetParameters: []
+    m_ResetParameters: []
   agentRunSpeed: 1
   agentRotationSpeed: 1
   goalScoredMaterial: {fileID: 2100000, guid: 6fb2214f236b2ba43be21f6b4211c234, type: 2}
@@ -671,7 +666,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 076ea380b3b0a5043a2a689676e387f2, type: 3}
@@ -737,7 +732,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5713624146561609779, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}

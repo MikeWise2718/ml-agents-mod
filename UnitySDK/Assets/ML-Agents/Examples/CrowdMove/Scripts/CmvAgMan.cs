@@ -125,7 +125,7 @@ public class CmvAgMan : MonoBehaviour
         pp.SetPreset("p1:par  p2:2.3  p3:3 p4:true p5:false p6");
 #endif
         pp.Process();
-        pp.Dump();
+        //pp.Dump();
         area = transform.parent.gameObject;
         ground = area.transform.Find("Ground").gameObject;
         //Debug.Log("Found ground");
@@ -137,22 +137,22 @@ public class CmvAgMan : MonoBehaviour
         agentParameters.onDemandDecision = false;
         agentParameters.numberOfActionsBetweenDecisions = 6;
         var ap = agentParameters;
- 
+
         var bp = brain;
 
         Debug.Log("AreaInit " + nagents + " agents " + name + " maxStep:" + ap.maxStep + " " +
-                  bp.vectorActionSpaceType +" vos:"+bp.vectorObservationSize+" vas:"+bp.vectorActionSize.Length);
+                  bp.vectorActionSpaceType + " vos:" + bp.vectorObservationSize + " vas:" + bp.vectorActionSize.Length);
         for (var i = 0; i < nagents; i++)
         {
             var aname = "Agent" + i.ToString("D2");
             Debug.Log("Creating agent " + aname);
             var ago = new GameObject(aname);
 
-            //ago.SetActive(false); // if we don't do this it gets enable events too soon (before we can init AgentParameters)
+            ago.SetActive(false); // if we don't do this it gets enable events too soon (before we can init AgentParameters)
             ago.transform.parent = this.transform;
             var cmvag = ago.AddComponent<CmvAgent>();
             cmvag.SetupAgent(this);
-            //ago.SetActive(true);// causes agent's InitializeAgent() to be called
+            ago.SetActive(true);// causes agent's InitializeAgent() to be called
         }
         CrowdManInitAgents();
         //for (var i = 0; i < nagents; i++)
@@ -183,11 +183,14 @@ public class CmvAgMan : MonoBehaviour
 
     void Awake()
     {
-        CreateAgents();
+
     }
     void Start()
     {
-
+    }
+    private void OnEnable()
+    {
+        CreateAgents();
     }
 
     // Update is called once per frame

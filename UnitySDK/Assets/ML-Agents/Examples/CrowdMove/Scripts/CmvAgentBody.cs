@@ -163,8 +163,11 @@ public class CmvAgentBody : MonoBehaviour
     }
     public void SyncToBody(GameObject go)
     {
-        go.transform.position = transform.position;
-        go.transform.localRotation = transform.localRotation;
+        if (go != null)
+        {
+            go.transform.position = transform.position;
+            go.transform.localRotation = transform.localRotation;
+        }
     }
 
     void OnCollisionEnter(Collision col)

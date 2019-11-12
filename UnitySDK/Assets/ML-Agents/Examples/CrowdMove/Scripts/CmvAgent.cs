@@ -30,7 +30,7 @@ public class CmvAgent : Agent
     public GameObject bannergo = null;
     public GameObject cube = null;
     public bool showStartMarker = false;
-
+    public SpaceType sType = SpaceType.Continuous;
 
     public void SetupAgent(CmvAgMan cmvAgMan)
     {
@@ -51,6 +51,13 @@ public class CmvAgent : Agent
         cube.transform.parent = transform;
         cmvagbod = cube.AddComponent<CmvAgentBody>();
         cmvagbod.Init(this);
+        var bhp = GetComponent<BehaviorParameters>();
+        //bhp.m_UseHeuristic = true;
+        var bp = bhp.brainParameters;
+        bp.vectorActionSpaceType = SpaceType.Continuous;
+        bp.vectorObservationSize = 36;
+        this.sType = bp.vectorActionSpaceType;
+
 
         // Create banner textmeshpro
         //var text = name + "\n" + name;
@@ -77,7 +84,39 @@ public class CmvAgent : Agent
         cmvagbod.InitializeAgentBody();
         Debug.Log("Initialized agent " + area.name + ":" + name + " maxStep:" + agentParameters.maxStep);
     }
-
+    public override float[] Heuristic()
+    {
+        switch (sType)
+        {
+            case SpaceType.Continuous:
+                {
+                    var r1 = Random.Range(-1, 1);
+                    var r2 = Random.Range(-1, 1);
+                    return new float[] { r1, r2 };
+                }
+            case SpaceType.Discrete:
+            {
+                    if (Input.GetKey(KeyCode.D))
+                    {
+                        return new float[] { 3 };
+                    }
+                    if (Input.GetKey(KeyCode.W))
+                    {
+                        return new float[] { 1 };
+                    }
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        return new float[] { 4 };
+                    }
+                    if (Input.GetKey(KeyCode.S))
+                    {
+                        return new float[] { 2 };
+                    }
+                    return new float[] { 0 };
+                }
+        }
+        return new float[] { 0,0 };
+    }
     public void CrowdManInit()
     {
         FindOtherAgents();
@@ -181,8 +220,7 @@ public class CmvAgent : Agent
         Vector3 rotateDir = Vector3.zero;
         Vector3 fwdDir = cube.transform.forward;
         Vector3 upDir = cube.transform.up;
-        var sType = SpaceType.Continuous;
-        if (sType == SpaceType.Continuous)
+        if (sType== SpaceType.Continuous)
         {
             dirToGo = fwdDir * Mathf.Clamp(act[0], -1f, 1f);
             rotateDir = upDir * Mathf.Clamp(act[1], -1f, 1f);
