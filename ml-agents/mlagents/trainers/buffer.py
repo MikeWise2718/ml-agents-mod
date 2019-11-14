@@ -92,6 +92,8 @@ class Buffer(dict):
                             "The batch size and training length requested for get_batch where"
                             " too large given the current number of data points."
                         )
+                    nn = batch_size*training_length
+                    print(f"     get_batch:{nn} len:{len(self)}")                            
                     if batch_size * training_length > len(self):
                         padding = np.array(self[-1]) * self.padding_value
                         return np.array(
