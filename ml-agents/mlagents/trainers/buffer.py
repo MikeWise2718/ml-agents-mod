@@ -309,6 +309,7 @@ class Buffer(dict):
                 )
             )
         for field_key in key_list:
+            print(f"     append_update_buffer {field_key}")
             self.update_buffer[field_key].extend(
                 self[agent_id][field_key].get_batch(
                     batch_size=batch_size, training_length=training_length
