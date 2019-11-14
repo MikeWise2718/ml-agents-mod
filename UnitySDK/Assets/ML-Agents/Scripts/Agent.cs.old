@@ -204,7 +204,8 @@ namespace MLAgents
         /// <summary>
         /// Agent parameters specified within the Editor via AgentEditor.
         /// </summary>
-        [HideInInspector] public AgentParameters agentParameters;
+        // [HideInInspector]
+        public AgentParameters agentParameters;
 
         /// Current Agent information (message sent to Brain).
         AgentInfo m_Info;

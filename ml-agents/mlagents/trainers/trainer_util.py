@@ -5,7 +5,8 @@ from mlagents.trainers.meta_curriculum import MetaCurriculum
 from mlagents.envs.exception import UnityEnvironmentException
 from mlagents.trainers.trainer import Trainer
 from mlagents.envs.brain import BrainParameters
-from mlagents.trainers.ppo.trainer import PPOTrainer
+#from mlagents.trainers.ppo.trainer import PPOTrainer
+from ppo.trainer import PPOTrainer
 from mlagents.trainers.sac.trainer import SACTrainer
 from mlagents.trainers.bc.offline_trainer import OfflineBCTrainer
 

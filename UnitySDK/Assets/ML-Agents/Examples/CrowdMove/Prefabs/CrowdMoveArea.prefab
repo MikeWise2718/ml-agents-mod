@@ -719,9 +719,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nagents: 1
-  ground: {fileID: 0}
-  redGoal: {fileID: 0}
-  area: {fileID: 0}
+  ground: {fileID: 1360208130907292}
+  redGoal: {fileID: 1185286572034058}
+  area: {fileID: 1745841960385024}
+  brain:
+    vectorObservationSize: 1
+    numStackedVectorObservations: 1
+    vectorActionSize: 01000000
+    vectorActionDescriptions: []
+    vectorActionSpaceType: 0
   agentParameters:
     maxStep: 0
     resetOnDone: 1

@@ -119,10 +119,10 @@ public class CmvAgMan : MonoBehaviour
 
     void CreateAgents()
     {
-        Debug.Log("CreateAgents called");
+        Debug.Log("CreateAgents called - CmvAgMan activating");
         var pp = new ParmProcessor();
 #if UNITY_EDITOR
-        pp.SetPreset("p1:par  p2:2.3  p3:3 p4:true p5:false p6");
+        pp.SetPreset("p1:par  p2:2.3  p3:3 p4:true p5:false p6");// for testing
 #endif
         pp.Process();
         //pp.Dump();
@@ -148,20 +148,14 @@ public class CmvAgMan : MonoBehaviour
             Debug.Log("Creating agent " + aname);
             var ago = new GameObject(aname);
 
-            ago.SetActive(false); // if we don't do this it gets enable events too soon (before we can init AgentParameters)
+            //ago.SetActive(false); // if we don't do this it gets enable events too soon (before we can init AgentParameters)
             ago.transform.parent = this.transform;
             var cmvag = ago.AddComponent<CmvAgent>();
             cmvag.SetupAgent(this);
-            ago.SetActive(true);// causes agent's InitializeAgent() to be called
+            //ago.SetActive(true);// causes agent's InitializeAgent() to be called
         }
         CrowdManInitAgents();
-        //for (var i = 0; i < nagents; i++)
-        //{
-        //    var aname = "Agent" + i.ToString("D2");
-        //    //Debug.Log("Creating agent " + aname);
-        //    var ago = transform.Find(aname).gameObject;
-        //    ago.SetActive(true);// causes agent's InitializeAgent() to be called
-        //}
+
         Debug.Log("CreateAgents finished");
     }
 

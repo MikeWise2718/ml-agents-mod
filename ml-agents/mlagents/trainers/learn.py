@@ -21,7 +21,8 @@ from typing import Any, Callable, Optional, List, NamedTuple
 from trainer_controller import TrainerController
 from mlagents.trainers.exception import TrainerError
 from mlagents.trainers.meta_curriculum import MetaCurriculum
-from mlagents.trainers.trainer_util import load_config, TrainerFactory
+# from mlagents.trainers.trainer_util import load_config, TrainerFactory
+from trainer_util import load_config, TrainerFactory
 from mlagents.envs.environment import UnityEnvironment
 from mlagents.envs.sampler_class import SamplerManager
 from mlagents.envs.exception import SamplerException
@@ -414,6 +415,7 @@ def main():
             "when training from the editor."
         )
     print("trainer_logger.getEffectiveLevel() is:{}".format(trainer_logger.getEffectiveLevel()))
+    print("env_logger.getEffectiveLevel() is:{}".format(env_logger.getEffectiveLevel()))
     print("50=Critical,40=Error,30=Warning,20=Info,10=Debug")
 
 

@@ -60,15 +60,48 @@ public class CmvAgent : Agent
         bp.vectorActionDescriptions = new string[] { "action1", "action2" };
         this.sType = bp.vectorActionSpaceType;
 
+        //SetupAgentSpaceType(SpaceType.Continuous);
+
 
         // Create banner textmeshpro
         //var text = name + "\n" + name;
         ////bannertmp = GraphAlgos.GraphUtil.MakeTextGo(gameObject, text, 1.5f, fvek: Vector3.back);
         //bannergo = bannertmp.transform.parent.gameObject;
         //bannergo.name = "banner";
+
+        groundRenderer = ground.GetComponent<Renderer>();
+        groundMaterial = groundRenderer.material;
+        cmvagbod.InitializeAgentBody();
+
+    }
+    public void SetupAgentSpaceType(SpaceType reqstype)
+    {
+        var bhp = GetComponent<BehaviorParameters>();
+        //bhp.m_UseHeuristic = true;
+        var bp = bhp.brainParameters;
+        bp.vectorActionSpaceType = reqstype;
+        this.sType = reqstype;
+        switch (reqstype)
+        {
+            case SpaceType.Continuous:
+                {
+                    bp.vectorObservationSize = 36;
+                    bp.vectorActionSize = new int[] { 2 };
+                    bp.vectorActionDescriptions = new string[] { "rotation", "translation" };
+                    break;
+                }
+            case SpaceType.Discrete:
+                {
+                    bp.vectorObservationSize = 36;
+                    bp.vectorActionSize = new int[] { 4 };
+                    bp.vectorActionDescriptions = new string[] { "rotate-right", "rotate-left", "move-forward", "move-backward" };
+                    break;
+                }
+        }
     }
     public override void InitializeAgent()
     {
+        // called by Agent.OnEnableHelper that is called when the agent is enabled or becomes active
         base.InitializeAgent();
         academy = FindObjectOfType<CmvAcademy>();
 
@@ -80,11 +113,9 @@ public class CmvAgent : Agent
             Destroy(sphere.GetComponent<SphereCollider>());
         }
 
-        groundRenderer = ground.GetComponent<Renderer>();
-        groundMaterial = groundRenderer.material;
+
         nmoves = 0;
-        cmvagbod.InitializeAgentBody();
-        Debug.Log("Initialized agent " + area.name + ":" + name + " maxStep:" + agentParameters.maxStep);
+        Debug.Log("Initialized agent " );
     }
     public override float[] Heuristic()
     {
@@ -152,15 +183,17 @@ public class CmvAgent : Agent
         }
         Debug.Log("otherAgents:"+aglist);
     }
+    int ncollected = 0;
     public override void CollectObservations()
     {
-        Debug.Log("Collecting observations for " + name + " useVectorobs:" + useVectorObs);
+        Debug.Log("Collecting observations for " + name + " useVectorobs:" + useVectorObs+" ncollected:"+ncollected);
         if (useVectorObs)
         {
             AddVectorObs(GetStepCount() / (float)agentParameters.maxStep);
             var rayobs = cmvagbod.Perceive();
             AddVectorObs(rayobs);
         }
+        ncollected++;
     }
     public Vector3 GetPos()
     {
