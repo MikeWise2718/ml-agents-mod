@@ -52,6 +52,7 @@ public class CmvAgent : Agent
         cmvagbod = cube.AddComponent<CmvAgentBody>();
         cmvagbod.Init(this);
         var bhp = GetComponent<BehaviorParameters>();
+        bhp.m_BehaviorName = "CrowdMove";
         //bhp.m_UseHeuristic = true;
         var bp = bhp.brainParameters;
         bp.vectorActionSpaceType = SpaceType.Continuous;
@@ -74,9 +75,14 @@ public class CmvAgent : Agent
         cmvagbod.InitializeAgentBody();
 
     }
+    private void Awake()
+    {
+        SetupAgentSpaceType(SpaceType.Continuous);
+    }
     public void SetupAgentSpaceType(SpaceType reqstype)
     {
         var bhp = GetComponent<BehaviorParameters>();
+        bhp.m_BehaviorName = "CrowdMove";
         //bhp.m_UseHeuristic = true;
         var bp = bhp.brainParameters;
         bp.vectorActionSpaceType = reqstype;

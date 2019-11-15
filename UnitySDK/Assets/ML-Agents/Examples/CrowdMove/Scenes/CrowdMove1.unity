@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &130291796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1185286572034058, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1594568231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &255077123
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +193,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &272135775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1360208130907292, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1594568231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &318490716
 GameObject:
   m_ObjectHideFlags: 1
@@ -314,6 +326,21 @@ PrefabInstance:
       propertyPath: nagents
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: area
+      value: 
+      objectReference: {fileID: 1322816510}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: ground
+      value: 
+      objectReference: {fileID: 1512456259}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: redGoal
+      value: 
+      objectReference: {fileID: 1476550588}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 076ea380b3b0a5043a2a689676e387f2, type: 3}
 --- !u!1 &762086410
@@ -408,6 +435,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 29.773, y: -69.171005, z: -29.985}
+--- !u!1 &1010963368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1745841960385024, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1594568231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1257687048
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +575,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
+--- !u!1 &1322816510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1745841960385024, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 722565969}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1476550588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1185286572034058, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 722565969}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1512456259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1360208130907292, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 722565969}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1574236047
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +655,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1588574775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1745841960385024, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1892819942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1594568231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,8 +725,29 @@ PrefabInstance:
       propertyPath: nagents
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: ground
+      value: 
+      objectReference: {fileID: 272135775}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: redGoal
+      value: 
+      objectReference: {fileID: 130291796}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: area
+      value: 
+      objectReference: {fileID: 1010963368}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 076ea380b3b0a5043a2a689676e387f2, type: 3}
+--- !u!1 &1802662784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1360208130907292, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1892819942}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1892819942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -734,6 +812,21 @@ PrefabInstance:
       propertyPath: nagents
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: ground
+      value: 
+      objectReference: {fileID: 1802662784}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: redGoal
+      value: 
+      objectReference: {fileID: 1969481031}
+    - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
+        type: 3}
+      propertyPath: area
+      value: 
+      objectReference: {fileID: 1588574775}
     - target: {fileID: 5713624146561609779, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
@@ -741,3 +834,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 076ea380b3b0a5043a2a689676e387f2, type: 3}
+--- !u!1 &1969481031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1185286572034058, guid: 076ea380b3b0a5043a2a689676e387f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1892819942}
+  m_PrefabAsset: {fileID: 0}

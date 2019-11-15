@@ -7,6 +7,8 @@ deprecation._PER_MODULE_WARNING_LIMIT = 0
 # # Unity ML-Agents Toolkit
 import logging
 import argparse
+from colorama import *
+init()
 
 from multiprocessing import Process, Queue
 import os
@@ -15,6 +17,7 @@ import shutil
 import numpy as np
 
 from typing import Any, Callable, Optional, List, NamedTuple
+from lgger import Lgger
 
 
 # from mlagents.trainers.trainer_controller import TrainerController
@@ -379,6 +382,7 @@ def create_environment_factory(
 
 def main():
     try:
+        print(Fore.YELLOW+"Hello from colorrama"+Fore.WHITE)
         print(
             """
 
