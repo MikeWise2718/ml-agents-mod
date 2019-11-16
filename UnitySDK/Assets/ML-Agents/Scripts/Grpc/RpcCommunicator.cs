@@ -267,6 +267,7 @@ namespace MLAgents
             m_CurrentAgents[brainKey].Add(agent);
         }
 
+
         /// <summary>
         /// Helper method that sends the current UnityRLOutput, receives the next UnityInput and
         /// Applies the appropriate AgentAction to the agents.
@@ -282,7 +283,6 @@ namespace MLAgents
             {
                 message.RlInitializationOutput = tempUnityRlInitializationOutput;
             }
-
             var input = Exchange(message);
             UpdateSentBrainParameters(tempUnityRlInitializationOutput);
 
@@ -332,6 +332,37 @@ namespace MLAgents
             return m_LastActionsReceived[key];
         }
 
+        string messRootDirName = "messages";
+        string messDirName = "";
+        string messSubDirName = "";
+        int stepNum = 0;
+
+        int maxLogStep = 100;
+        string fmt = "D3";
+        public void SaveMessageText(string filename, string sdata,bool incstep=false)
+        {
+            if (stepNum > maxLogStep) return;
+            if (messSubDirName=="")
+            {
+                messSubDirName = DateTime.Now.ToString("yyyyMMdd-HHmmss");
+                messDirName = messRootDirName + "/" + messSubDirName;
+                stepNum = 0;
+                fmt = "D" + maxLogStep.ToString().Length;
+            }
+            if (!System.IO.Directory.Exists(messDirName))
+            {
+                System.IO.Directory.CreateDirectory(messDirName);
+            }
+            var sstep = stepNum.ToString(fmt);
+            var fname = messDirName + "/" + filename + sstep+ ".json";
+            Debug.Log("Writing " + fname + " len:" + sdata.Length);
+            System.IO.File.WriteAllText(fname, sdata);
+            if (incstep)
+            {
+                stepNum++;
+            }
+        }
+
         /// <summary>
         /// Send a UnityOutput and receives a UnityInput.
         /// </summary>
@@ -339,6 +370,8 @@ namespace MLAgents
         /// <param name="unityOutput">The UnityOutput to be sent.</param>
         private UnityInputProto Exchange(UnityOutputProto unityOutput)
         {
+            Debug.Log("Exchange size:" + unityOutput.CalculateSize());
+            SaveMessageText("obs", unityOutput.ToString());
 # if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
             if (!m_IsOpen)
             {
@@ -347,8 +380,10 @@ namespace MLAgents
             try
             {
                 var message = m_Client.Exchange(WrapMessage(unityOutput, 200));
+                SaveMessageText("act", message.UnityInput.ToString(), incstep: true);
                 if (message.Header.Status == 200)
                 {
+
                     return message.UnityInput;
                 }
 

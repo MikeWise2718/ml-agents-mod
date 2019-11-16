@@ -27,6 +27,7 @@ from mlagents.trainers.meta_curriculum import MetaCurriculum
 # from mlagents.trainers.trainer_util import load_config, TrainerFactory
 from trainer_util import load_config, TrainerFactory
 from mlagents.envs.environment import UnityEnvironment
+# from ../../ml-agents-env/envs/environment import UnityEnvironment
 from mlagents.envs.sampler_class import SamplerManager
 from mlagents.envs.exception import SamplerException
 from mlagents.envs.base_unity_environment import BaseUnityEnvironment

@@ -1,4 +1,6 @@
 import logging
+from lgger import *
+
 import grpc
 from typing import Optional
 
@@ -105,7 +107,7 @@ class RpcCommunicator(Communicator):
         self.unity_to_external.parent_conn.send(message)
         output = self.unity_to_external.parent_conn.recv()
         if output.header.status != 200:
-            return None
+            return None        
         return output.unity_output
 
     def close(self):
