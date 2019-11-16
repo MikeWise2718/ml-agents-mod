@@ -13,6 +13,7 @@ clrG    = '\033[32m' # green
 clrY    = '\033[33m' # yellowe
 clrB    = '\033[34m' # blue
 clrP    = '\033[35m' # purple
+clrM    = '\033[35m' # purple
 clrC    = '\033[36m' # cyan
 clrW    = '\033[37m' # yellown
 
@@ -21,6 +22,7 @@ clrIG="\033[0;92m"       # Green
 clrIY="\033[0;93m"      # Yellow
 clrIB="\033[0;94m"        # Blue
 clrIP="\033[0;95m"      # Purple
+clrIM="\033[0;95m"      # Purple
 clrIC="\033[0;96m"        # Cyan
 clrIW="\033[0;97m"       # White
 

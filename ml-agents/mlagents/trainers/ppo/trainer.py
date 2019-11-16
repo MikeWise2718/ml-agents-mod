@@ -3,13 +3,15 @@
 # Contains an implementation of PPO as described in: https://arxiv.org/abs/1707.06347
 
 import logging
+from lgger import *
 from collections import defaultdict
 from typing import Dict
 
 import numpy as np
 
 from mlagents.envs.brain import AllBrainInfo
-from mlagents.trainers.ppo.policy import PPOPolicy
+#from mlagents.trainers.ppo.policy import PPOPolicy
+from ppo.policy import PPOPolicy
 from mlagents.trainers.ppo.multi_gpu_policy import MultiGpuPPOPolicy, get_devices
 #from mlagents.trainers.rl_trainer import RLTrainer, AllRewardsOutput
 from rl_trainer import RLTrainer, AllRewardsOutput
@@ -92,6 +94,7 @@ class PPOTrainer(RLTrainer):
         if self.is_training:
             self.policy.update_normalization(info.vector_observations)
         for l in range(len(info.agents)):
+            lgg.info(f"  process_experiences for agent {l}",clrR)   
             agent_actions = self.training_buffer[info.agents[l]]["actions"]
             if (
                 info.local_done[l]
@@ -114,15 +117,15 @@ class PPOTrainer(RLTrainer):
                 tmp_returns = []
                 for name in self.policy.reward_signals:
                     bootstrap_value = value_next[name]
-                    print(f"   agent:{l} id:{agent_id} reward_signal:{name} - calling get_batch()")
+                    lgg.info(f"   agent:{l} id:{agent_id} reward_signal:{name} - calling get_batch()")
                     local_rewards = self.training_buffer[agent_id][
                         "{}_rewards".format(name)
                     ].get_batch()
-                    print(f"   agent:{l} id:{agent_id} value_estimates:{name} - calling get_batch()")
+                    lgg.info(f"   agent:{l} id:{agent_id} value_estimates:{name} - calling get_batch()")
                     local_value_estimates = self.training_buffer[agent_id][
                         "{}_value_estimates".format(name)
                     ].get_batch()
-                    print(f"   back")
+                    lgg.info(f"   back")
                     local_advantage = get_gae(
                         rewards=local_rewards,
                         value_estimates=local_value_estimates,
@@ -130,14 +133,14 @@ class PPOTrainer(RLTrainer):
                         gamma=self.policy.reward_signals[name].gamma,
                         lambd=self.trainer_parameters["lambd"],
                     )
-                    print(f"   local return")
+                    lgg.info(f"   local return")
                     local_return = local_advantage + local_value_estimates
                     # This is later use as target for the different value estimates
-                    print(f"   set local return")
+                    lgg.info(f"   set local return")
                     self.training_buffer[agent_id]["{}_returns".format(name)].set(
                         local_return
                     )
-                    print(f"   set local advantage")
+                    lgg.info(f"   set local advantage")
                     self.training_buffer[agent_id]["{}_advantage".format(name)].set(
                         local_advantage
                     )
@@ -148,19 +151,19 @@ class PPOTrainer(RLTrainer):
 
                 global_advantages = list(np.mean(np.array(tmp_advantages), axis=0))
                 global_returns = list(np.mean(np.array(tmp_returns), axis=0))
-                print(f"   global_advantages.set")
+                lgg.info(f"   global_advantages.set")
                 self.training_buffer[agent_id]["advantages"].set(global_advantages)
-                print(f"   discounted_returns.set")
+                lgg.info(f"   discounted_returns.set")
                 self.training_buffer[agent_id]["discounted_returns"].set(global_returns)
 
-                print(f"   append_update_buffer")
+                lgg.info(f"   append_update_buffer")
                 self.training_buffer.append_update_buffer(
                     agent_id,
                     batch_size=None,
                     training_length=self.policy.sequence_length,
                 )
 
-                print(f"   reset_agent")
+                lgg.info(f"   reset_agent")
                 self.training_buffer[agent_id].reset_agent()
                 if info.local_done[l]:
                     self.stats["Environment/Episode Length"].append(

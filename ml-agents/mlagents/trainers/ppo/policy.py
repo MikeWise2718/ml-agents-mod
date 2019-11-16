@@ -1,13 +1,18 @@
 import logging
+from lgger import *
+
 import numpy as np
 from typing import Any, Dict, Optional
 import tensorflow as tf
 
 from mlagents.envs.timers import timed
 from mlagents.envs.brain import BrainInfo, BrainParameters
-from mlagents.trainers.models import EncoderType, LearningRateSchedule
-from mlagents.trainers.ppo.models import PPOModel
-from mlagents.trainers.tf_policy import TFPolicy
+from ppo.models import EncoderType, LearningRateSchedule
+from ppo.models import PPOModel
+from tf_policy import TFPolicy
+#from mlagents.trainers.models import EncoderType, LearningRateSchedule
+#from mlagents.trainers.ppo.models import PPOModel
+#from mlagents.trainers.tf_policy import TFPolicy
 from mlagents.trainers.components.reward_signals.reward_signal_factory import (
     create_reward_signal,
 )
@@ -42,7 +47,7 @@ class PPOPolicy(TFPolicy):
             "Losses/Value Loss": "value_loss",
             "Losses/Policy Loss": "policy_loss",
         }
-
+        lgg.info(f"    construct PPOPolicy",clrM)
         self.create_model(
             brain, trainer_params, reward_signal_configs, is_training, load, seed
         )
@@ -76,6 +81,7 @@ class PPOPolicy(TFPolicy):
         :param reward_signal_configs: Reward signal config
         :param seed: Random seed.
         """
+        lgg.info(f"      create_model",clrM)
         with self.graph.as_default():
             self.model = PPOModel(
                 brain=brain,
