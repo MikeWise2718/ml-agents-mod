@@ -12,6 +12,7 @@ init()
 
 from multiprocessing import Process, Queue
 import os
+import sys
 import glob
 import shutil
 import numpy as np
@@ -24,14 +25,28 @@ from lgger import Lgger
 from trainer_controller import TrainerController
 from mlagents.trainers.exception import TrainerError
 from mlagents.trainers.meta_curriculum import MetaCurriculum
-# from mlagents.trainers.trainer_util import load_config, TrainerFactory
-from trainer_util import load_config, TrainerFactory
+from mlagents.trainers.trainer_util import load_config, TrainerFactory
+#from trainer_util import load_config, TrainerFactory
 from mlagents.envs.environment import UnityEnvironment
-# from ../../ml-agents-env/envs/environment import UnityEnvironment
 from mlagents.envs.sampler_class import SamplerManager
 from mlagents.envs.exception import SamplerException
 from mlagents.envs.base_unity_environment import BaseUnityEnvironment
 from mlagents.envs.subprocess_env_manager import SubprocessEnvManager
+
+
+print(f"PythonPath:{os.environ.get('PYTHONPATH')}")
+
+import types
+def imports():
+    for name, val in globals().items():
+        if isinstance(val, types.ModuleType):
+            yield val.__name__
+print(list(imports()))
+
+
+import inspect
+print("UnityEnvironment imported from :"+inspect.getfile(UnityEnvironment))
+print("TrainerFactory imported from :"+inspect.getfile(TrainerFactory))
 
 
 class CommandLineOptions(NamedTuple):
