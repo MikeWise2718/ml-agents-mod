@@ -7,8 +7,6 @@ deprecation._PER_MODULE_WARNING_LIMIT = 0
 # # Unity ML-Agents Toolkit
 import logging
 import argparse
-from colorama import *
-init()
 
 from multiprocessing import Process, Queue
 import os
@@ -18,7 +16,8 @@ import shutil
 import numpy as np
 
 from typing import Any, Callable, Optional, List, NamedTuple
-from lgger import Lgger
+from lgger import *
+
 
 
 # from mlagents.trainers.trainer_controller import TrainerController
@@ -26,7 +25,6 @@ from trainer_controller import TrainerController
 from mlagents.trainers.exception import TrainerError
 from mlagents.trainers.meta_curriculum import MetaCurriculum
 from mlagents.trainers.trainer_util import load_config, TrainerFactory
-#from trainer_util import load_config, TrainerFactory
 from mlagents.envs.environment import UnityEnvironment
 from mlagents.envs.sampler_class import SamplerManager
 from mlagents.envs.exception import SamplerException
@@ -34,19 +32,19 @@ from mlagents.envs.base_unity_environment import BaseUnityEnvironment
 from mlagents.envs.subprocess_env_manager import SubprocessEnvManager
 
 
-print(f"PythonPath:{os.environ.get('PYTHONPATH')}")
+lgg.info(f"PythonPath:{os.environ.get('PYTHONPATH')}",clrY)
 
 import types
 def imports():
     for name, val in globals().items():
         if isinstance(val, types.ModuleType):
             yield val.__name__
-print(list(imports()))
+lgg.info("imported modules:"+str(list(imports())),clrC)
 
 
 import inspect
-print("UnityEnvironment imported from :"+inspect.getfile(UnityEnvironment))
-print("TrainerFactory imported from :"+inspect.getfile(TrainerFactory))
+lgg.info("UnityEnvironment imported from :"+inspect.getfile(UnityEnvironment),clrY)
+lgg.info("TrainerFactory imported from :"+inspect.getfile(TrainerFactory),clrY)
 
 
 class CommandLineOptions(NamedTuple):
@@ -398,7 +396,6 @@ def create_environment_factory(
 
 def main():
     try:
-        print(Fore.YELLOW+"Hello from colorrama"+Fore.WHITE)
         print(
             """
 

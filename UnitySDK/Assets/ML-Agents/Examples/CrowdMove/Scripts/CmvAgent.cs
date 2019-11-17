@@ -51,15 +51,15 @@ public class CmvAgent : Agent
         cube.transform.parent = transform;
         cmvagbod = cube.AddComponent<CmvAgentBody>();
         cmvagbod.Init(this);
-        var bhp = GetComponent<BehaviorParameters>();
-        bhp.m_BehaviorName = "CrowdMove";
-        //bhp.m_UseHeuristic = true;
-        var bp = bhp.brainParameters;
-        bp.vectorActionSpaceType = SpaceType.Continuous;
-        bp.vectorObservationSize = 36;
-        bp.vectorActionSize = new int[] { 2 };
-        bp.vectorActionDescriptions = new string[] { "action1", "action2" };
-        this.sType = bp.vectorActionSpaceType;
+        //var bhp = GetComponent<BehaviorParameters>();
+        //bhp.m_BehaviorName = "CrowdMove";
+        ////bhp.m_UseHeuristic = true;
+        //var bp = bhp.brainParameters;
+        //bp.vectorActionSpaceType = SpaceType.Continuous;
+        //bp.vectorObservationSize = 36;
+        //bp.vectorActionSize = new int[] { 2 };
+        //bp.vectorActionDescriptions = new string[] { "action1", "action2" };
+        //this.sType = bp.vectorActionSpaceType;
 
         //SetupAgentSpaceType(SpaceType.Continuous);
 

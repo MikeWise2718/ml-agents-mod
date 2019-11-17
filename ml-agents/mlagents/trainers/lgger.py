@@ -4,8 +4,15 @@ import glob
 import sys
 import tarfile
 import time
+from colorama import init
+init()
+
 from datetime import datetime
 import json
+# __all__ = ['lgg','clrNrm',
+#           'clrR','clrG','clrY','clrB','clrP','clrM','clrC','clrW',
+#           'clrIR','clrIG','clrIY','clrIB','clrIP','clrIM','clrIC','clrIW',
+#           ]
 
 clrNrm  = '\033[0m'  # white (normal)
 clrR    = '\033[31m' # red
@@ -25,7 +32,6 @@ clrIP="\033[0;95m"      # Purple
 clrIM="\033[0;95m"      # Purple
 clrIC="\033[0;96m"        # Cyan
 clrIW="\033[0;97m"       # White
-
 
 class Lgger:
 
@@ -74,19 +80,6 @@ class Lgger:
     def GetLogger(self):
         return getlgg()
 
-_lgg = Lgger("nonname1",3)      
-print("Initialized _lgg")
 lgg = Lgger("nonname2",3)    
 print("Initialized lgg")
 
-def createlgg(nodename,verbosity,defnodecolor):
-    global _lgg
-    _lgg = lgger(nodename,verbosity,defnodecolor)
-    return _lgg
-
-def getlgg():
-    global _lgg
-    return _lgg
-
-def GetLogger():
-    return getlgg()

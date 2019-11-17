@@ -148,8 +148,11 @@ namespace MLAgents
                 ChannelCredentials.Insecure);
 
             m_Client = new UnityToExternalProto.UnityToExternalProtoClient(channel);
+            SaveMessageText("in0-", unityOutput.ToString());
             var result = m_Client.Exchange(WrapMessage(unityOutput, 200));
+            SaveMessageText("in1-", result.ToString());
             unityInput = m_Client.Exchange(WrapMessage(null, 200)).UnityInput;
+            SaveMessageText("in2-", unityInput.ToString());
 #if UNITY_EDITOR
 #if UNITY_2017_2_OR_NEWER
             EditorApplication.playModeStateChanged += HandleOnPlayModeChanged;
@@ -395,7 +398,7 @@ namespace MLAgents
             try
             {
                 var message = m_Client.Exchange(WrapMessage(unityOutput, 200));
-                SaveMessageText("act", message.UnityInput.ToString(), incstep: true);
+                SaveMessageText("rea", message.UnityInput.ToString(), incstep: true);
                 if (message.Header.Status == 200)
                 {
 
