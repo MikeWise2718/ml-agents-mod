@@ -103,7 +103,10 @@ class UnityEnvironment(BaseUnityEnvironment):
 
         rl_init_parameters_in = UnityRLInitializationInputProto(seed=seed)
         try:
+            lgg.info("Send_academy_parameters",clrIR)
+            lgg.info(rl_init_parameters_in,clrIG)
             aca_output = self.send_academy_parameters(rl_init_parameters_in)
+            lgg.info(aca_output,clrIB)
             aca_params = aca_output.rl_initialization_output
         except UnityTimeOutException:
             self._close()
@@ -225,6 +228,7 @@ class UnityEnvironment(BaseUnityEnvironment):
             )
         else:
             logger.debug("This is the launch string {}".format(launch_string))
+            lgg.info(f"Launch string:{launch_string}",clrM)
             # Launch Unity environment
             if not docker_training:
                 subprocess_args = [launch_string]
@@ -331,9 +335,12 @@ class UnityEnvironment(BaseUnityEnvironment):
                 )
 
         if self._loaded:
+            lgg.info("communicator exchange",clrIY)
+            lgg.info(f"  generate_reset_input:{self._generate_reset_input(train_mode, config, custom_reset_parameters)}",clrM)
             outputs = self.communicator.exchange(
                 self._generate_reset_input(train_mode, config, custom_reset_parameters)
             )
+            lgg.info(f"  outputs:{outputs}",clrIB)
             if outputs is None:
                 raise UnityCommunicationException("Communicator has stopped.")
             self._update_brain_parameters(outputs)
