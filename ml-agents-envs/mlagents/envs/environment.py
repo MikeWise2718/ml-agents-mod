@@ -5,6 +5,7 @@ import numpy as np
 import os
 import subprocess
 from typing import Dict, List, Optional, Any
+from lgger import *
 
 from mlagents.envs.base_unity_environment import BaseUnityEnvironment
 from mlagents.envs.timers import timed, hierarchical_timer
@@ -128,6 +129,7 @@ class UnityEnvironment(BaseUnityEnvironment):
         logger.info(
             "\n'{0}' started successfully!\n{1}".format(self._academy_name, str(self))
         )
+        lgg.info(f"UnityEnvironment created - {self._academy_name} started successfully",clrY)
 
     @property
     def logfile_path(self):
@@ -552,7 +554,10 @@ class UnityEnvironment(BaseUnityEnvironment):
                 vector_action, memory, text_action, value, custom_action
             )
             with hierarchical_timer("communicator.exchange"):
+                lgg.info("communicator exchange",clrIY)
+                lgg.info(f"  step_input:{step_input}",clrY)
                 outputs = self.communicator.exchange(step_input)
+                lgg.info(f"  outputs:{outputs}",clrY)
             if outputs is None:
                 raise UnityCommunicationException("Communicator has stopped.")
             self._update_brain_parameters(outputs)
