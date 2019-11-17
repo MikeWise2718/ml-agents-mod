@@ -324,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
@@ -636,11 +636,11 @@ MonoBehaviour:
     targetFrameRate: 60
   resetParameters:
     m_ResetParameters: []
-  agentRunSpeed: 1
-  agentRotationSpeed: 1
-  goalScoredMaterial: {fileID: 2100000, guid: 6fb2214f236b2ba43be21f6b4211c234, type: 2}
-  failMaterial: {fileID: 2100000, guid: 867932cf9d1d2db4d963b3de01d8a5bb, type: 2}
-  gravityMultiplier: 1
+  agentRunSpeed: 0
+  agentRotationSpeed: 0
+  goalScoredMaterial: {fileID: 0}
+  failMaterial: {fileID: 0}
+  gravityMultiplier: 0
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0
@@ -723,7 +723,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
@@ -810,7 +810,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}

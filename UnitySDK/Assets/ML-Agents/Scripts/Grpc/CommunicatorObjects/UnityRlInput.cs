@@ -78,7 +78,7 @@ namespace MLAgents.CommunicatorObjects {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UnityRLInputProto(UnityRLInputProto other) : this() {
       agentActions_ = other.agentActions_.Clone();
-      EnvironmentParameters = other.environmentParameters_ != null ? other.EnvironmentParameters.Clone() : null;
+      environmentParameters_ = other.environmentParameters_ != null ? other.environmentParameters_.Clone() : null;
       isTraining_ = other.isTraining_;
       command_ = other.command_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -123,7 +123,7 @@ namespace MLAgents.CommunicatorObjects {
 
     /// <summary>Field number for the "command" field.</summary>
     public const int CommandFieldNumber = 4;
-    private global::MLAgents.CommunicatorObjects.CommandProto command_ = 0;
+    private global::MLAgents.CommunicatorObjects.CommandProto command_ = global::MLAgents.CommunicatorObjects.CommandProto.Step;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::MLAgents.CommunicatorObjects.CommandProto Command {
       get { return command_; }
@@ -158,7 +158,7 @@ namespace MLAgents.CommunicatorObjects {
       hash ^= AgentActions.GetHashCode();
       if (environmentParameters_ != null) hash ^= EnvironmentParameters.GetHashCode();
       if (IsTraining != false) hash ^= IsTraining.GetHashCode();
-      if (Command != 0) hash ^= Command.GetHashCode();
+      if (Command != global::MLAgents.CommunicatorObjects.CommandProto.Step) hash ^= Command.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -181,7 +181,7 @@ namespace MLAgents.CommunicatorObjects {
         output.WriteRawTag(24);
         output.WriteBool(IsTraining);
       }
-      if (Command != 0) {
+      if (Command != global::MLAgents.CommunicatorObjects.CommandProto.Step) {
         output.WriteRawTag(32);
         output.WriteEnum((int) Command);
       }
@@ -200,7 +200,7 @@ namespace MLAgents.CommunicatorObjects {
       if (IsTraining != false) {
         size += 1 + 1;
       }
-      if (Command != 0) {
+      if (Command != global::MLAgents.CommunicatorObjects.CommandProto.Step) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Command);
       }
       if (_unknownFields != null) {
@@ -217,14 +217,14 @@ namespace MLAgents.CommunicatorObjects {
       agentActions_.Add(other.agentActions_);
       if (other.environmentParameters_ != null) {
         if (environmentParameters_ == null) {
-          environmentParameters_ = new global::MLAgents.CommunicatorObjects.EnvironmentParametersProto();
+          EnvironmentParameters = new global::MLAgents.CommunicatorObjects.EnvironmentParametersProto();
         }
         EnvironmentParameters.MergeFrom(other.EnvironmentParameters);
       }
       if (other.IsTraining != false) {
         IsTraining = other.IsTraining;
       }
-      if (other.Command != 0) {
+      if (other.Command != global::MLAgents.CommunicatorObjects.CommandProto.Step) {
         Command = other.Command;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -244,9 +244,9 @@ namespace MLAgents.CommunicatorObjects {
           }
           case 18: {
             if (environmentParameters_ == null) {
-              environmentParameters_ = new global::MLAgents.CommunicatorObjects.EnvironmentParametersProto();
+              EnvironmentParameters = new global::MLAgents.CommunicatorObjects.EnvironmentParametersProto();
             }
-            input.ReadMessage(environmentParameters_);
+            input.ReadMessage(EnvironmentParameters);
             break;
           }
           case 24: {
@@ -254,7 +254,7 @@ namespace MLAgents.CommunicatorObjects {
             break;
           }
           case 32: {
-            command_ = (global::MLAgents.CommunicatorObjects.CommandProto) input.ReadEnum();
+            Command = (global::MLAgents.CommunicatorObjects.CommandProto) input.ReadEnum();
             break;
           }
         }

@@ -84,7 +84,7 @@ namespace MLAgents.CommunicatorObjects {
       maxStepReached_ = other.maxStepReached_;
       id_ = other.id_;
       actionMask_ = other.actionMask_.Clone();
-      CustomObservation = other.customObservation_ != null ? other.CustomObservation.Clone() : null;
+      customObservation_ = other.customObservation_ != null ? other.customObservation_.Clone() : null;
       compressedObservations_ = other.compressedObservations_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -379,7 +379,7 @@ namespace MLAgents.CommunicatorObjects {
       actionMask_.Add(other.actionMask_);
       if (other.customObservation_ != null) {
         if (customObservation_ == null) {
-          customObservation_ = new global::MLAgents.CommunicatorObjects.CustomObservationProto();
+          CustomObservation = new global::MLAgents.CommunicatorObjects.CustomObservationProto();
         }
         CustomObservation.MergeFrom(other.CustomObservation);
       }
@@ -441,9 +441,9 @@ namespace MLAgents.CommunicatorObjects {
           }
           case 98: {
             if (customObservation_ == null) {
-              customObservation_ = new global::MLAgents.CommunicatorObjects.CustomObservationProto();
+              CustomObservation = new global::MLAgents.CommunicatorObjects.CustomObservationProto();
             }
-            input.ReadMessage(customObservation_);
+            input.ReadMessage(CustomObservation);
             break;
           }
           case 106: {

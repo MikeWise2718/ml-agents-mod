@@ -555,7 +555,7 @@ class UnityEnvironment(BaseUnityEnvironment):
             )
             with hierarchical_timer("communicator.exchange"):
                 lgg.info("communicator exchange",clrIY)
-                lgg.info(f"  step_input:{step_input}",clrY)
+                lgg.info(f"  step_input:{step_input}",clrC)
                 outputs = self.communicator.exchange(step_input)
                 lgg.info(f"  outputs:{outputs}",clrY)
             if outputs is None:
