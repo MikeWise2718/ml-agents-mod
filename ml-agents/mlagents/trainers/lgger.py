@@ -34,7 +34,9 @@ l_err = 1
 l_error = 1
 l_warn = 2
 l_info = 3
-l_debug = 4
+l_verbose = 4
+l_debug = 5
+levelstring = ["allways","error","warn","info","verbose","debug"]
 
 class Lgger:
 
@@ -42,12 +44,12 @@ class Lgger:
     nodename = ""
 
     stripcolor = False
-    l_always = 0    
-    l_error = 1
-    l_err = 1
-    l_warn = 2
-    l_info = 3
-    l_debug = 4
+    # l_always = 0    
+    # l_error = 1
+    # l_err = 1
+    # l_warn = 2
+    # l_info = 3
+    # l_debug = 4
     defnodecolor = cNrm
 
     def __init__(self, nodename="default",verbosity=3,defnodecolor=cNrm):
@@ -67,22 +69,25 @@ class Lgger:
     def allways(self,msg,clr=defnodecolor):
         self.dolog(0,msg,clr)
     def err(self,msg,clr=defnodecolor):
-        self.dolog(self.l_err,msg,clr)
+        self.dolog(l_err,msg,clr)
 
     def error(self,msg,clr=defnodecolor):
-        self.dolog(self.l_err,msg,clr)
+        self.dolog(l_err,msg,clr)
 
     def warn(self,msg,clr=defnodecolor):
-        self.dolog(self.l_warn,msg,clr)
+        self.dolog(l_warn,msg,clr)
 
     def info(self,msg,clr=defnodecolor):
-        self.dolog(self.l_info,msg,clr)
+        self.dolog(l_info,msg,clr)
+
+    def verbose(self,msg,clr=defnodecolor):
+        self.dolog(l_verbose,msg,clr)
 
     def deb(self,msg,clr=defnodecolor):
-        self.dolog(self.l_debug,msg,clr)
+        self.dolog(l_debug,msg,clr)
 
     def debug(self,msg,clr=defnodecolor):
-        self.dolog(self.l_debug,msg,clr)      
+        self.dolog(l_debug,msg,clr)      
 
     def GetLogger(self):
         return getlgg()
@@ -96,7 +101,9 @@ def error(msg,clr=defnodecolor):
 def warm(msg,clr=defnodecolor):
     _lgg.warn(msg,clr)
 def info(msg,clr=defnodecolor):
-    _lgg.info(msg,clr)
+    _lgg.info(msg,clr)    
+def verbose(msg,clr=defnodecolor):
+    _lgg.verbose(msg,clr)    
 def deb(msg,clr=defnodecolor):
     _lgg.deb(msg,clr)
 def debug(msg,clr=defnodecolor):
@@ -113,9 +120,8 @@ def get_level():
     return _lgg.verbosity
 
 def get_level_str():
-    lst = ["allways","error","warn","info","debug"]
     i = _lgg.verbosity
-    return lst[i]
+    return levelstring[i]
 
 _lgg = Lgger("nonname2",3)    
 print("Initialized lgger - level:"+get_level_str())

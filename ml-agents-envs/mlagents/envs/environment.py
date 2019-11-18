@@ -336,11 +336,11 @@ class UnityEnvironment(BaseUnityEnvironment):
 
         if self._loaded:
             lgg.info("communicator exchange",lgg.cIY)
-            lgg.info(f"  generate_reset_input:{self._generate_reset_input(train_mode, config, custom_reset_parameters)}",lgg.cM)
+            lgg.verbose(f"  generate_reset_input:{self._generate_reset_input(train_mode, config, custom_reset_parameters)}",lgg.cM)
             outputs = self.communicator.exchange(
                 self._generate_reset_input(train_mode, config, custom_reset_parameters)
             )
-            lgg.info(f"  outputs:{outputs}",lgg.cIB)
+            lgg.verbose(f"  outputs:{outputs}",lgg.cIB)
             if outputs is None:
                 raise UnityCommunicationException("Communicator has stopped.")
             self._update_brain_parameters(outputs)
@@ -562,9 +562,9 @@ class UnityEnvironment(BaseUnityEnvironment):
             )
             with hierarchical_timer("communicator.exchange"):
                 lgg.info("communicator exchange",lgg.cIY)
-                lgg.info(f"  step_input:{step_input}",lgg.cC)
+                lgg.verbose(f"  step_input:{step_input}",lgg.cC)
                 outputs = self.communicator.exchange(step_input)
-                lgg.info(f"  outputs:{outputs}",lgg.cY)
+                lgg.verbose(f"  outputs:{outputs}",lgg.cY)
             if outputs is None:
                 raise UnityCommunicationException("Communicator has stopped.")
             self._update_brain_parameters(outputs)
