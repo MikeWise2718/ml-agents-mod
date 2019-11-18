@@ -85,12 +85,11 @@ namespace MLAgents
             UnityInputProto initializationInput;
             try
             {
-                initializationInput = Initialize(
-                    new UnityOutputProto
-                    {
-                        RlInitializationOutput = academyParameters
-                    },
-                    out input);
+                var ipars = new UnityOutputProto
+                {
+                    RlInitializationOutput = academyParameters
+                };
+                initializationInput = Initialize(ipars,  out input);
             }
             catch
             {
@@ -138,11 +137,12 @@ namespace MLAgents
             SendCommandEvent(rlInput.Command, rlInput.EnvironmentParameters);
         }
 
-        RpcComLogger rpclog;
+        RpcComLogger rpclog = new RpcComLogger();
 
         private UnityInputProto Initialize(UnityOutputProto unityOutput,
             out UnityInputProto unityInput)
         {
+            Debug.Log("Initializing UIP");
 # if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
             m_IsOpen = true;
             var channel = new Channel(

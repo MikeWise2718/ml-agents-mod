@@ -295,19 +295,20 @@ namespace MLAgents
                 //environment must use Inference.
                 try
                 {
-                    var unityRLInitParameters = Communicator.Initialize(
-                        new CommunicatorInitParameters
+                    var cpars = new CommunicatorInitParameters
+                    {
+                        version = k_ApiVersion,
+                        name = gameObject.name,
+                        environmentResetParameters = new EnvironmentResetParameters
                         {
-                            version = k_ApiVersion,
-                            name = gameObject.name,
-                            environmentResetParameters = new EnvironmentResetParameters
-                            {
-                                resetParameters = resetParameters,
-                                customResetParameters = customResetParameters
-                            }
-                        });
+                            resetParameters = resetParameters,
+                            customResetParameters = customResetParameters
+                        }
+                    };
+                    Debug.Log("Initialized cpars");
+                    var unityRLInitParameters = Communicator.Initialize(cpars);
                     Random.InitState(unityRLInitParameters.seed);
-                    Debug.Log($"Academy First RPC Exchange succeede on port {port} - proceeding with Training Environment seed:{unityRLInitParameters.seed}");
+                    Debug.Log($"Academy First RPC Exchange succeeded on port {port} - proceeding with Training Environment seed:{unityRLInitParameters.seed}");
                 }
                 catch (System.Exception ex)
                 {
