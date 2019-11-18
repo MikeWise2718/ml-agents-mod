@@ -1,6 +1,6 @@
 import numpy as np
 import h5py
-from lgger import *
+import lgger as lgg
 
 from mlagents.envs.exception import UnityException
 
@@ -94,7 +94,7 @@ class Buffer(dict):
                             " too large given the current number of data points."
                         )
                     nn = batch_size*training_length
-                    lgg.info(f"     get_batch:{nn} len:{len(self)}",clrY)                            
+                    lgg.info(f"     get_batch:{nn} len:{len(self)}",lgg.cY)                            
                     if batch_size * training_length > len(self):
                         padding = np.array(self[-1]) * self.padding_value
                         return np.array(
@@ -310,7 +310,7 @@ class Buffer(dict):
                 )
             )
         for field_key in key_list:
-            lgg.info(f"     append_update_buffer {agent_id} {field_key}",clrC)
+            lgg.info(f"     append_update_buffer {agent_id} {field_key}",lgg.cC)
             self.update_buffer[field_key].extend(
                 self[agent_id][field_key].get_batch(
                     batch_size=batch_size, training_length=training_length

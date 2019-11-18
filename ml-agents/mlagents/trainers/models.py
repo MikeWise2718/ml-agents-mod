@@ -1,5 +1,5 @@
 import logging
-from lgger import *
+import lgger as lgg
 
 from enum import Enum
 from typing import Callable, List

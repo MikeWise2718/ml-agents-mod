@@ -9,42 +9,48 @@ init()
 
 from datetime import datetime
 import json
-# __all__ = ['lgg','clrNrm',
-#           'clrR','clrG','clrY','clrB','clrP','clrM','clrC','clrW',
-#           'clrIR','clrIG','clrIY','clrIB','clrIP','clrIM','clrIC','clrIW',
-#           ]
 
-clrNrm  = '\033[0m'  # white (normal)
-clrR    = '\033[31m' # red
-clrG    = '\033[32m' # green
-clrY    = '\033[33m' # yellowe
-clrB    = '\033[34m' # blue
-clrP    = '\033[35m' # purple
-clrM    = '\033[35m' # purple
-clrC    = '\033[36m' # cyan
-clrW    = '\033[37m' # yellown
+cNrm  = '\033[0m'  # white (normal)
+cR    = '\033[31m' # red
+cG    = '\033[32m' # green
+cY    = '\033[33m' # yellowe
+cB    = '\033[34m' # blue
+cP    = '\033[35m' # purple
+cM    = '\033[35m' # purple
+cC    = '\033[36m' # cyan
+cW    = '\033[37m' # yellown
 
-clrIR="\033[0;91m"         # Red
-clrIG="\033[0;92m"       # Green
-clrIY="\033[0;93m"      # Yellow
-clrIB="\033[0;94m"        # Blue
-clrIP="\033[0;95m"      # Purple
-clrIM="\033[0;95m"      # Purple
-clrIC="\033[0;96m"        # Cyan
-clrIW="\033[0;97m"       # White
+cIR="\033[0;91m"         # Red
+cIG="\033[0;92m"       # Green
+cIY="\033[0;93m"      # Yellow
+cIB="\033[0;94m"        # Blue
+cIP="\033[0;95m"      # Purple
+cIM="\033[0;95m"      # Purple
+cIC="\033[0;96m"        # Cyan
+cIW="\033[0;97m"       # White
+defnodecolor = cNrm
+l_allways = 0
+l_err = 1
+l_error = 1
+l_warn = 2
+l_info = 3
+l_debug = 4
 
 class Lgger:
 
     verbosity = 3
     nodename = ""
-    defnodecolor = clrNrm
+
     stripcolor = False
+    l_always = 0    
+    l_error = 1
     l_err = 1
     l_warn = 2
     l_info = 3
     l_debug = 4
+    defnodecolor = cNrm
 
-    def __init__(self, nodename="default",verbosity=3,defnodecolor=clrNrm):
+    def __init__(self, nodename="default",verbosity=3,defnodecolor=cNrm):
         self.nodename = nodename
         self.verbosity = verbosity
         self.defnodecolor = defnodecolor
@@ -57,8 +63,9 @@ class Lgger:
             if (self.stripcolor):
                 print(str(msg))
             else:
-                print(clr+str(msg)+clrNrm)
-    
+                print(clr+str(msg)+cNrm)
+    def allways(self,msg,clr=defnodecolor):
+        self.dolog(0,msg,clr)
     def err(self,msg,clr=defnodecolor):
         self.dolog(self.l_err,msg,clr)
 
@@ -80,6 +87,36 @@ class Lgger:
     def GetLogger(self):
         return getlgg()
 
-lgg = Lgger("nonname2",3)    
-print("Initialized lgg")
+def allways(msg,clr=defnodecolor):
+    _lgg.allways(msg,clr)
+def err(msg,clr=defnodecolor):
+    _lgg.err(msg,clr)
+def error(msg,clr=defnodecolor):
+    _lgg.error(msg,clr)
+def warm(msg,clr=defnodecolor):
+    _lgg.warn(msg,clr)
+def info(msg,clr=defnodecolor):
+    _lgg.info(msg,clr)
+def deb(msg,clr=defnodecolor):
+    _lgg.deb(msg,clr)
+def debug(msg,clr=defnodecolor):
+    _lgg.debug(msg,clr)
+
+def set_level(level):
+    if level<l_err:
+        level = l_err
+    if level>l_debug:
+        level = l_debug
+    _lgg.verbosity = level
+
+def get_level():
+    return _lgg.verbosity
+
+def get_level_str():
+    lst = ["allways","error","warn","info","debug"]
+    i = _lgg.verbosity
+    return lst[i]
+
+_lgg = Lgger("nonname2",3)    
+print("Initialized lgger")
 

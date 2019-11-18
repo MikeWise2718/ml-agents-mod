@@ -6,7 +6,7 @@ import os
 import json
 import logging
 
-from lgger import *
+import lgger as lgg
 
  
 from typing import Dict, List, Optional, Set
@@ -205,14 +205,14 @@ class TrainerController(object):
                 new_brains = external_brains - last_brain_names
                 if last_brain_names != env_manager.external_brains.keys():
                     for name in new_brains:
-                        msg = "Trainer_factory now generating "+clrR+name+clrW+" trainer"
+                        msg = "Trainer_factory now generating "+lgg.cR+name+lgg.cW+" trainer"
                         lgg.info(msg)                       
                         trainer = self.trainer_factory.generate(
                             env_manager.external_brains[name]
                         )
                         self.start_trainer(trainer, env_manager)
                     last_brain_names = external_brains
-                lgg.info(f"Advancing on step {global_step}",clrG)                    
+                lgg.info(f"Advancing on step {global_step}",lgg.cG)                    
                 n_steps = self.advance(env_manager)
                 for i in range(n_steps):
                     global_step += 1
@@ -284,7 +284,7 @@ class TrainerController(object):
                 if brain_name in self.trainer_metrics:
                     self.trainer_metrics[brain_name].add_delta_step(delta_time_step)
                 if brain_name in step_info.brain_name_to_action_info:
-                    lgg.info(f"  add_experiences",clrB)    
+                    lgg.info(f"  add_experiences",lgg.cB)    
                     trainer.add_experiences(
                         step_info.previous_all_brain_info,
                         step_info.current_all_brain_info,

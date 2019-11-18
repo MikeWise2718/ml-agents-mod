@@ -16,7 +16,7 @@ import shutil
 import numpy as np
 
 from typing import Any, Callable, Optional, List, NamedTuple
-from lgger import *
+import lgger as lgg
 
 
 
@@ -31,20 +31,21 @@ from mlagents.envs.exception import SamplerException
 from mlagents.envs.base_unity_environment import BaseUnityEnvironment
 from mlagents.envs.subprocess_env_manager import SubprocessEnvManager
 
-
-lgg.info(f"PythonPath:{os.environ.get('PYTHONPATH')}",clrY)
+lgg.set_level(lgg.l_info)
+lgg.allways("lgg.level:"+lgg.get_level_str(),lgg.cG)
+lgg.info(f"PythonPath:{os.environ.get('PYTHONPATH')}",lgg.cY)
 
 import types
 def imports():
     for name, val in globals().items():
         if isinstance(val, types.ModuleType):
             yield val.__name__
-lgg.info("imported modules:"+str(list(imports())),clrC)
+lgg.info("imported modules:"+str(list(imports())),lgg.cC)
 
 
 import inspect
-lgg.info("UnityEnvironment imported from :"+inspect.getfile(UnityEnvironment),clrY)
-lgg.info("TrainerFactory imported from :"+inspect.getfile(TrainerFactory),clrY)
+lgg.info("UnityEnvironment imported from :"+inspect.getfile(UnityEnvironment),lgg.cY)
+lgg.info("TrainerFactory imported from :"+inspect.getfile(TrainerFactory),lgg.cY)
 
 
 class CommandLineOptions(NamedTuple):

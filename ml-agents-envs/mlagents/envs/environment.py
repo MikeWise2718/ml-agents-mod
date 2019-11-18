@@ -5,7 +5,7 @@ import numpy as np
 import os
 import subprocess
 from typing import Dict, List, Optional, Any
-from lgger import *
+import lgger as lgg
 
 from mlagents.envs.base_unity_environment import BaseUnityEnvironment
 from mlagents.envs.timers import timed, hierarchical_timer
@@ -98,15 +98,15 @@ class UnityEnvironment(BaseUnityEnvironment):
         else:
             msg = "Start training by pressing the Play button in the Unity Editor."
             logger.info( msg )
-            lgg.info(msg,clrIR)
+            lgg.info(msg,lgg.cIR)
         self._loaded = True
 
         rl_init_parameters_in = UnityRLInitializationInputProto(seed=seed)
         try:
-            lgg.info(f"Send_academy_parameters port {self.port}",clrIR)
-            lgg.info(rl_init_parameters_in,clrIG)
+            lgg.info(f"Send_academy_parameters port {self.port}",lgg.cIR)
+            lgg.info(rl_init_parameters_in,lgg.cIG)
             aca_output = self.send_academy_parameters(rl_init_parameters_in)
-            lgg.info(aca_output,clrIB)
+            lgg.info(aca_output,lgg.cIB)
             aca_params = aca_output.rl_initialization_output
         except UnityTimeOutException:
             self._close()
@@ -132,7 +132,7 @@ class UnityEnvironment(BaseUnityEnvironment):
         logger.info(
             "\n'{0}' started successfully!\n{1}".format(self._academy_name, str(self))
         )
-        lgg.info(f"UnityEnvironment created - {self._academy_name} started successfully",clrY)
+        lgg.info(f"UnityEnvironment created - {self._academy_name} started successfully",lgg.cY)
 
     @property
     def logfile_path(self):
@@ -228,7 +228,7 @@ class UnityEnvironment(BaseUnityEnvironment):
             )
         else:
             logger.debug("This is the launch string {}".format(launch_string))
-            lgg.info(f"Launch string:{launch_string}",clrM)
+            lgg.info(f"Launch string:{launch_string}",lgg.cM)
             # Launch Unity environment
             if not docker_training:
                 subprocess_args = [launch_string]
@@ -335,12 +335,12 @@ class UnityEnvironment(BaseUnityEnvironment):
                 )
 
         if self._loaded:
-            lgg.info("communicator exchange",clrIY)
-            lgg.info(f"  generate_reset_input:{self._generate_reset_input(train_mode, config, custom_reset_parameters)}",clrM)
+            lgg.info("communicator exchange",lgg.cIY)
+            lgg.info(f"  generate_reset_input:{self._generate_reset_input(train_mode, config, custom_reset_parameters)}",lgg.cM)
             outputs = self.communicator.exchange(
                 self._generate_reset_input(train_mode, config, custom_reset_parameters)
             )
-            lgg.info(f"  outputs:{outputs}",clrIB)
+            lgg.info(f"  outputs:{outputs}",lgg.cIB)
             if outputs is None:
                 raise UnityCommunicationException("Communicator has stopped.")
             self._update_brain_parameters(outputs)
@@ -561,10 +561,10 @@ class UnityEnvironment(BaseUnityEnvironment):
                 vector_action, memory, text_action, value, custom_action
             )
             with hierarchical_timer("communicator.exchange"):
-                lgg.info("communicator exchange",clrIY)
-                lgg.info(f"  step_input:{step_input}",clrC)
+                lgg.info("communicator exchange",lgg.cIY)
+                lgg.info(f"  step_input:{step_input}",lgg.cC)
                 outputs = self.communicator.exchange(step_input)
-                lgg.info(f"  outputs:{outputs}",clrY)
+                lgg.info(f"  outputs:{outputs}",lgg.cY)
             if outputs is None:
                 raise UnityCommunicationException("Communicator has stopped.")
             self._update_brain_parameters(outputs)

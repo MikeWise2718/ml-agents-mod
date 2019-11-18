@@ -3,7 +3,8 @@
 # Contains an implementation of PPO as described in: https://arxiv.org/abs/1707.06347
 
 import logging
-from lgger import *
+import lgger as lgg
+
 from collections import defaultdict
 from typing import Dict
 
@@ -94,7 +95,7 @@ class PPOTrainer(RLTrainer):
         if self.is_training:
             self.policy.update_normalization(info.vector_observations)
         for l in range(len(info.agents)):
-            lgg.info(f"  process_experiences for agent {l}",clrR)   
+            lgg.info(f"  process_experiences for agent {l}",lgg.cR)   
             agent_actions = self.training_buffer[info.agents[l]]["actions"]
             if (
                 info.local_done[l]
@@ -144,9 +145,7 @@ class PPOTrainer(RLTrainer):
                     self.training_buffer[agent_id]["{}_advantage".format(name)].set(
                         local_advantage
                     )
-                    print(f"   advantages.append")
                     tmp_advantages.append(local_advantage)
-                    print(f"   returns.append")
                     tmp_returns.append(local_return)
 
                 global_advantages = list(np.mean(np.array(tmp_advantages), axis=0))

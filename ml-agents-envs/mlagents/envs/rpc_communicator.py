@@ -1,5 +1,5 @@
 import logging
-from lgger import *
+import lgger as lgg
 
 import grpc
 from typing import Optional
