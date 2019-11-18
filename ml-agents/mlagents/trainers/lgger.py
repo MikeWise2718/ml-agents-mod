@@ -118,5 +118,5 @@ def get_level_str():
     return lst[i]
 
 _lgg = Lgger("nonname2",3)    
-print("Initialized lgger")
+print("Initialized lgger - level:"+get_level_str())
 
