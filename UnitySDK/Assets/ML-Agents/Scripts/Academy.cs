@@ -265,19 +265,21 @@ namespace MLAgents
             m_OriginalMaximumDeltaTime = Time.maximumDeltaTime;
 
             InitializeAcademy();
-
+            var port  = 5004;
             // Try to launch the communicator by using the arguments passed at launch
             try
             {
+                port = ReadArgs();
                 Communicator = new RpcCommunicator(
                     new CommunicatorInitParameters
                     {
-                        port = ReadArgs()
+                        port = port
                     });
             }
             catch
             {
 #if UNITY_EDITOR
+                port = 5004;
                 Communicator = new RpcCommunicator(
                     new CommunicatorInitParameters
                     {
@@ -305,9 +307,12 @@ namespace MLAgents
                             }
                         });
                     Random.InitState(unityRLInitParameters.seed);
+                    Debug.Log($"Academy First RPC Exchange succeede on port {port} - proceeding with Training Environment seed:{unityRLInitParameters.seed}");
                 }
-                catch
+                catch (System.Exception ex)
                 {
+                    Debug.Log(ex.ToString());
+                    Debug.Log($"Academy First RPC Exchange failed on port {port} - proceeding with Inference Environment");
                     Communicator = null;
                 }
 

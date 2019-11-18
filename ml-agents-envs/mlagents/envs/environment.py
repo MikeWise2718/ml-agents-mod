@@ -96,14 +96,14 @@ class UnityEnvironment(BaseUnityEnvironment):
         if file_name is not None:
             self.executable_launcher(file_name, docker_training, no_graphics, args)
         else:
-            logger.info(
-                "Start training by pressing the Play button in the Unity Editor."
-            )
+            msg = "Start training by pressing the Play button in the Unity Editor."
+            logger.info( msg )
+            lgg.info(msg,clrIR)
         self._loaded = True
 
         rl_init_parameters_in = UnityRLInitializationInputProto(seed=seed)
         try:
-            lgg.info("Send_academy_parameters",clrIR)
+            lgg.info(f"Send_academy_parameters port {self.port}",clrIR)
             lgg.info(rl_init_parameters_in,clrIG)
             aca_output = self.send_academy_parameters(rl_init_parameters_in)
             lgg.info(aca_output,clrIB)

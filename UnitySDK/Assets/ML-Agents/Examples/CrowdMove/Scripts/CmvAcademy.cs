@@ -19,9 +19,9 @@ public class CmvAcademy : Academy {
         Debug.Log(Environment.CommandLine);
         Debug.Log(Environment.GetCommandLineArgs());
         Physics.gravity *= gravityMultiplier;
-        RpcCommunicator.doMessLogging = true;
-        RpcCommunicator.maxLogStep = 300;
-        RpcCommunicator.freqModulo = 3;
+        RpcComLogger.doMessLogging = true;
+        RpcComLogger.maxLogStep = 300;
+        RpcComLogger.freqModulo = 3;
     }
 
     public override void AcademyReset()

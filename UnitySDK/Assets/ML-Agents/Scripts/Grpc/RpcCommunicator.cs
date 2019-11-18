@@ -138,6 +138,8 @@ namespace MLAgents
             SendCommandEvent(rlInput.Command, rlInput.EnvironmentParameters);
         }
 
+        RpcComLogger rpclog;
+
         private UnityInputProto Initialize(UnityOutputProto unityOutput,
             out UnityInputProto unityInput)
         {
@@ -148,11 +150,11 @@ namespace MLAgents
                 ChannelCredentials.Insecure);
 
             m_Client = new UnityToExternalProto.UnityToExternalProtoClient(channel);
-            SaveMessageText("in0-", unityOutput.ToString());
+            rpclog.SaveMessageText("in0-", unityOutput.ToString());
             var result = m_Client.Exchange(WrapMessage(unityOutput, 200));
-            SaveMessageText("in1-", result.ToString());
+            rpclog.SaveMessageText("in1-", result.ToString());
             unityInput = m_Client.Exchange(WrapMessage(null, 200)).UnityInput;
-            SaveMessageText("in2-", unityInput.ToString());
+            rpclog.SaveMessageText("in2-", unityInput.ToString());
 #if UNITY_EDITOR
 #if UNITY_2017_2_OR_NEWER
             EditorApplication.playModeStateChanged += HandleOnPlayModeChanged;
@@ -335,52 +337,7 @@ namespace MLAgents
             return m_LastActionsReceived[key];
         }
 
-        public static bool doMessLogging = false;
-        public static string messRootDirName = "messages";
-        public static int maxLogStep = 100;
-        public static int freqModulo = 1;
-        string messDirName = "";
-        string messSubDirName = "";
-        int stepNum = 0;
-
-        string fmt = "D3";
-        public void DoSaveMessageText(string filename, string sdata)
-        {
-            if (messSubDirName == "")
-            {
-                messSubDirName = DateTime.Now.ToString("yyyyMMdd-HHmmss");
-                messDirName = messRootDirName + "/" + messSubDirName;
-                stepNum = 0;
-                fmt = "D" + maxLogStep.ToString().Length;
-            }
-            if (!System.IO.Directory.Exists(messDirName))
-            {
-                System.IO.Directory.CreateDirectory(messDirName);
-            }
-            var sstep = stepNum.ToString(fmt);
-            var fname = messDirName + "/" + filename + sstep + ".json";
-            Debug.Log("Writing " + fname + " len:" + sdata.Length);
-            System.IO.File.WriteAllText(fname, sdata);
-        }
-
-        public void SaveMessageText(string filename, string sdata,bool incstep=false)
-        {
-            if (doMessLogging)
-            {
-                if (stepNum <= maxLogStep)
-                {
-                    if (freqModulo <= 1 || (stepNum % freqModulo == 0))
-                    {
-                        DoSaveMessageText(filename, sdata);
-                    }
-                }
-            }
-            if (incstep)
-            {
-                stepNum++;
-            }
-        }
-
+  
         /// <summary>
         /// Send a UnityOutput and receives a UnityInput.
         /// </summary>
@@ -389,7 +346,7 @@ namespace MLAgents
         private UnityInputProto Exchange(UnityOutputProto unityOutput)
         {
             Debug.Log("Exchange size:" + unityOutput.CalculateSize());
-            SaveMessageText("obs", unityOutput.ToString());
+            rpclog.SaveMessageText("obs", unityOutput.ToString());
 # if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
             if (!m_IsOpen)
             {
@@ -398,7 +355,7 @@ namespace MLAgents
             try
             {
                 var message = m_Client.Exchange(WrapMessage(unityOutput, 200));
-                SaveMessageText("rea", message.UnityInput.ToString(), incstep: true);
+                rpclog.SaveMessageText("rea", message.UnityInput.ToString(), incstep: true);
                 if (message.Header.Status == 200)
                 {
 
