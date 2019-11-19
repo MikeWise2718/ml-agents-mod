@@ -69,8 +69,8 @@ namespace MLAgents.CommunicatorObjects {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UnityInputProto(UnityInputProto other) : this() {
-      rlInput_ = other.rlInput_ != null ? other.rlInput_.Clone() : null;
-      rlInitializationInput_ = other.rlInitializationInput_ != null ? other.rlInitializationInput_.Clone() : null;
+      RlInput = other.rlInput_ != null ? other.RlInput.Clone() : null;
+      RlInitializationInput = other.rlInitializationInput_ != null ? other.RlInitializationInput.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -172,13 +172,13 @@ namespace MLAgents.CommunicatorObjects {
       }
       if (other.rlInput_ != null) {
         if (rlInput_ == null) {
-          RlInput = new global::MLAgents.CommunicatorObjects.UnityRLInputProto();
+          rlInput_ = new global::MLAgents.CommunicatorObjects.UnityRLInputProto();
         }
         RlInput.MergeFrom(other.RlInput);
       }
       if (other.rlInitializationInput_ != null) {
         if (rlInitializationInput_ == null) {
-          RlInitializationInput = new global::MLAgents.CommunicatorObjects.UnityRLInitializationInputProto();
+          rlInitializationInput_ = new global::MLAgents.CommunicatorObjects.UnityRLInitializationInputProto();
         }
         RlInitializationInput.MergeFrom(other.RlInitializationInput);
       }
@@ -195,16 +195,16 @@ namespace MLAgents.CommunicatorObjects {
             break;
           case 10: {
             if (rlInput_ == null) {
-              RlInput = new global::MLAgents.CommunicatorObjects.UnityRLInputProto();
+              rlInput_ = new global::MLAgents.CommunicatorObjects.UnityRLInputProto();
             }
-            input.ReadMessage(RlInput);
+            input.ReadMessage(rlInput_);
             break;
           }
           case 18: {
             if (rlInitializationInput_ == null) {
-              RlInitializationInput = new global::MLAgents.CommunicatorObjects.UnityRLInitializationInputProto();
+              rlInitializationInput_ = new global::MLAgents.CommunicatorObjects.UnityRLInitializationInputProto();
             }
-            input.ReadMessage(RlInitializationInput);
+            input.ReadMessage(rlInitializationInput_);
             break;
           }
         }

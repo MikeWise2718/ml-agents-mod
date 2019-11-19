@@ -33,6 +33,7 @@ namespace MLAgents
         UnityRLOutputProto m_CurrentUnityRlOutput =
             new UnityRLOutputProto();
 
+
         Dictionary<string, Dictionary<Agent, AgentAction>> m_LastActionsReceived =
             new Dictionary<string, Dictionary<Agent, AgentAction>>();
 
@@ -74,6 +75,8 @@ namespace MLAgents
             };
 
             academyParameters.EnvironmentParameters = new EnvironmentParametersProto();
+
+            m_CurrentUnityRlOutput.EnvironmentParameters = new EnvironmentParametersProto();
 
             var resetParameters = initParameters.environmentResetParameters.resetParameters;
             foreach (var key in resetParameters.Keys)
@@ -346,6 +349,11 @@ namespace MLAgents
         private UnityInputProto Exchange(UnityOutputProto unityOutput)
         {
             Debug.Log("Exchange size:" + unityOutput.CalculateSize());
+            var ai = unityOutput.RlOutput.AgentInfos;
+            EnvironmentParametersProto evo = unityOutput.RlOutput.EnvironmentParameters;
+            evo.FloatParameters["pi"] = 3.14f;
+            Debug.Log("pi:" + unityOutput.RlOutput.EnvironmentParameters.FloatParameters["pi"]);
+
             rpclog.SaveMessageText("obs", unityOutput.ToString());
 # if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
             if (!m_IsOpen)
@@ -354,8 +362,11 @@ namespace MLAgents
             }
             try
             {
+
                 var message = m_Client.Exchange(WrapMessage(unityOutput, 200));
                 rpclog.SaveMessageText("rea", message.UnityInput.ToString(), incstep: true);
+                UnityInputProto ui = message.UnityInput;
+                EnvironmentParametersProto eve = ui.RlInput.EnvironmentParameters;
                 if (message.Header.Status == 200)
                 {
 

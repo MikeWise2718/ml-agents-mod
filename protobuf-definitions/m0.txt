@@ -1,0 +1,302 @@
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem variables 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem GRPC-TOOLS required. Install with `nuget install Grpc.Tools`.  
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem Then un-comment and replace [DIRECTORY] with location of files. 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem For example, on Windows, you might have something like: 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem set COMPILER=Grpc.Tools.1.14.1\tools\windows_x64 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem set COMPILER=[DIRECTORY] 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>set SRC_DIR=proto\mlagents\envs\communicator_objects 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>set DST_DIR_C=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>set DST_DIR_P=..\ml-agents-envs 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>set PROTO_PATH=proto 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>set PYTHON_PACKAGE=mlagents\envs\communicator_objects 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem clean 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rd /s /q ..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rd /s /q ..\ml-agents-envs\mlagents\envs\communicator_objects 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>mkdir ..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>mkdir ..\ml-agents-envs\mlagents\envs\communicator_objects 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem generate proto objects in python and C# 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>for %i in (proto\mlagents\envs\communicator_objects\*.proto) do (
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects %i  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs %i 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\agent_action.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\agent_action.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\agent_info.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\agent_info.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\brain_parameters.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\brain_parameters.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\command.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\command.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\compressed_observation.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\compressed_observation.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\custom_action.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\custom_action.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\custom_observation.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\custom_observation.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\custom_reset_parameters.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\custom_reset_parameters.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\demonstration_meta.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\demonstration_meta.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\engine_configuration.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\engine_configuration.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\environment_parameters.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\environment_parameters.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\header.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\header.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\space_type.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\space_type.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_input.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_input.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_message.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_message.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_output.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_output.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_rl_initialization_input.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_rl_initialization_input.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_rl_initialization_output.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_rl_initialization_output.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_rl_input.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_rl_input.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_rl_output.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_rl_output.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+protoc --proto_path=proto --csharp_out=..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_to_external.proto  
+ protoc --proto_path=proto --python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_to_external.proto 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem grpc 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>set GRPC=unity_to_external.proto 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>protoc --proto_path=proto --csharp_out ..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects --grpc_out ..\UnitySDK\Assets\ML-Agents\Scripts\Grpc\CommunicatorObjects proto\mlagents\envs\communicator_objects\unity_to_external.proto --plugin=protoc-gen-grpc=\grpc_csharp_plugin.exe 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>python -m grpc_tools.protoc --proto_path=proto --python_out=..\ml-agents-envs --grpc_python_out=..\ml-agents-envs proto\mlagents\envs\communicator_objects\unity_to_external.proto 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem Generate the init file for the python module 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>rem rm -f $DST_DIR_P/$PYTHON_PACKAGE/__init__.py 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>setlocal enabledelayedexpansion 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>for %i in (..\ml-agents-envs\mlagents\envs\communicator_objects\*.py) do (
+set FILE=%~ni  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=agent_action_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=agent_info_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=brain_parameters_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=command_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=compressed_observation_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=custom_action_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=custom_observation_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=custom_reset_parameters_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=demonstration_meta_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=engine_configuration_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=environment_parameters_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=header_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=space_type_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_input_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_message_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_output_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_rl_initialization_input_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_rl_initialization_output_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_rl_input_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_rl_output_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_to_external_pb2  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=unity_to_external_pb2_grpc  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 
+
+(ml-agents) D:\Unity\ml-agents\protobuf-definitions>(
+set FILE=__init__  
+ rem echo from .$(basename $FILE) import * >> $DST_DIR_P/$PYTHON_PACKAGE/__init__.py  
+ echo from .!FILE! import *  1>>..\ml-agents-envs\mlagents\envs\communicator_objects\__init__.py 
+) 

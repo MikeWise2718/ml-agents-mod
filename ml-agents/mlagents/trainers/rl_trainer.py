@@ -128,7 +128,10 @@ class RLTrainer(Trainer):
         """
         self.trainer_metrics.start_experience_collection_timer()
         if take_action_outputs:
+            self.stats["Custom/Val1"].append(100)
+            self.stats["Custom/Val2"].append(200)
             self.stats["Policy/Entropy"].append(take_action_outputs["entropy"].mean())
+            self.stats["Policy/Entropy2"].append(2*take_action_outputs["entropy"].mean())
             self.stats["Policy/Learning Rate"].append(
                 take_action_outputs["learning_rate"]
             )
