@@ -128,6 +128,11 @@ class RLTrainer(Trainer):
         """
         self.trainer_metrics.start_experience_collection_timer()
         if take_action_outputs:
+            if "EnvStats" in curr_all_info:
+                env_stats = curr_all_info["EnvStats"]
+                for kk in env_stats.float_stat:
+                    vv = env_stats[kk]
+                    self.stats[kk].append(vv)
             self.stats["Custom/Val1"].append(100)
             self.stats["Custom/Val2"].append(200)
             self.stats["Policy/Entropy"].append(take_action_outputs["entropy"].mean())

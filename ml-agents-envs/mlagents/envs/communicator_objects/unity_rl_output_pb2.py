@@ -14,16 +14,16 @@ _sym_db = _symbol_database.Default()
 
 
 from mlagents.envs.communicator_objects import agent_info_pb2 as mlagents_dot_envs_dot_communicator__objects_dot_agent__info__pb2
-from mlagents.envs.communicator_objects import environment_parameters_pb2 as mlagents_dot_envs_dot_communicator__objects_dot_environment__parameters__pb2
+from mlagents.envs.communicator_objects import environment_statistics_pb2 as mlagents_dot_envs_dot_communicator__objects_dot_environment__statistics__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='mlagents/envs/communicator_objects/unity_rl_output.proto',
   package='communicator_objects',
   syntax='proto3',
-  serialized_pb=_b('\n8mlagents/envs/communicator_objects/unity_rl_output.proto\x12\x14\x63ommunicator_objects\x1a\x33mlagents/envs/communicator_objects/agent_info.proto\x1a?mlagents/envs/communicator_objects/environment_parameters.proto\"\xf5\x02\n\x12UnityRLOutputProto\x12L\n\nagentInfos\x18\x02 \x03(\x0b\x32\x38.communicator_objects.UnityRLOutputProto.AgentInfosEntry\x12P\n\x16\x65nvironment_parameters\x18\x03 \x01(\x0b\x32\x30.communicator_objects.EnvironmentParametersProto\x1aI\n\x12ListAgentInfoProto\x12\x33\n\x05value\x18\x01 \x03(\x0b\x32$.communicator_objects.AgentInfoProto\x1an\n\x0f\x41gentInfosEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12J\n\x05value\x18\x02 \x01(\x0b\x32;.communicator_objects.UnityRLOutputProto.ListAgentInfoProto:\x02\x38\x01J\x04\x08\x01\x10\x02\x42\x1f\xaa\x02\x1cMLAgents.CommunicatorObjectsb\x06proto3')
+  serialized_pb=_b('\n8mlagents/envs/communicator_objects/unity_rl_output.proto\x12\x14\x63ommunicator_objects\x1a\x33mlagents/envs/communicator_objects/agent_info.proto\x1a?mlagents/envs/communicator_objects/environment_statistics.proto\"\xf5\x02\n\x12UnityRLOutputProto\x12L\n\nagentInfos\x18\x02 \x03(\x0b\x32\x38.communicator_objects.UnityRLOutputProto.AgentInfosEntry\x12P\n\x16\x65nvironment_statistics\x18\x03 \x01(\x0b\x32\x30.communicator_objects.EnvironmentStatisticsProto\x1aI\n\x12ListAgentInfoProto\x12\x33\n\x05value\x18\x01 \x03(\x0b\x32$.communicator_objects.AgentInfoProto\x1an\n\x0f\x41gentInfosEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12J\n\x05value\x18\x02 \x01(\x0b\x32;.communicator_objects.UnityRLOutputProto.ListAgentInfoProto:\x02\x38\x01J\x04\x08\x01\x10\x02\x42\x1f\xaa\x02\x1cMLAgents.CommunicatorObjectsb\x06proto3')
   ,
-  dependencies=[mlagents_dot_envs_dot_communicator__objects_dot_agent__info__pb2.DESCRIPTOR,mlagents_dot_envs_dot_communicator__objects_dot_environment__parameters__pb2.DESCRIPTOR,])
+  dependencies=[mlagents_dot_envs_dot_communicator__objects_dot_agent__info__pb2.DESCRIPTOR,mlagents_dot_envs_dot_communicator__objects_dot_environment__statistics__pb2.DESCRIPTOR,])
 
 
 
@@ -110,7 +110,7 @@ _UNITYRLOUTPUTPROTO = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='environment_parameters', full_name='communicator_objects.UnityRLOutputProto.environment_parameters', index=1,
+      name='environment_statistics', full_name='communicator_objects.UnityRLOutputProto.environment_statistics', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -137,7 +137,7 @@ _UNITYRLOUTPUTPROTO_LISTAGENTINFOPROTO.containing_type = _UNITYRLOUTPUTPROTO
 _UNITYRLOUTPUTPROTO_AGENTINFOSENTRY.fields_by_name['value'].message_type = _UNITYRLOUTPUTPROTO_LISTAGENTINFOPROTO
 _UNITYRLOUTPUTPROTO_AGENTINFOSENTRY.containing_type = _UNITYRLOUTPUTPROTO
 _UNITYRLOUTPUTPROTO.fields_by_name['agentInfos'].message_type = _UNITYRLOUTPUTPROTO_AGENTINFOSENTRY
-_UNITYRLOUTPUTPROTO.fields_by_name['environment_parameters'].message_type = mlagents_dot_envs_dot_communicator__objects_dot_environment__parameters__pb2._ENVIRONMENTPARAMETERSPROTO
+_UNITYRLOUTPUTPROTO.fields_by_name['environment_statistics'].message_type = mlagents_dot_envs_dot_communicator__objects_dot_environment__statistics__pb2._ENVIRONMENTSTATISTICSPROTO
 DESCRIPTOR.message_types_by_name['UnityRLOutputProto'] = _UNITYRLOUTPUTPROTO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 

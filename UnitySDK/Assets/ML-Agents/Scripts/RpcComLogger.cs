@@ -6,7 +6,7 @@ namespace MLAgents
     public class RpcComLogger
     {
         public static bool doMessLogging = false;
-        public static string messRootDirName = "messages";
+        public static string messRootDirName = "RpcMessages";
         public static int maxLogStep = 100;
         public static int freqModulo = 1;
         string messDirName = "";

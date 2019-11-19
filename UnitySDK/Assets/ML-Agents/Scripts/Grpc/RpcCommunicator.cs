@@ -76,7 +76,7 @@ namespace MLAgents
 
             academyParameters.EnvironmentParameters = new EnvironmentParametersProto();
 
-            m_CurrentUnityRlOutput.EnvironmentParameters = new EnvironmentParametersProto();
+            m_CurrentUnityRlOutput.EnvironmentStatistics = new EnvironmentStatisticsProto();
 
             var resetParameters = initParameters.environmentResetParameters.resetParameters;
             foreach (var key in resetParameters.Keys)
@@ -350,9 +350,14 @@ namespace MLAgents
         {
             Debug.Log("Exchange size:" + unityOutput.CalculateSize());
             var ai = unityOutput.RlOutput.AgentInfos;
-            EnvironmentParametersProto evo = unityOutput.RlOutput.EnvironmentParameters;
-            evo.FloatParameters["pi"] = 3.14f;
-            Debug.Log("pi:" + unityOutput.RlOutput.EnvironmentParameters.FloatParameters["pi"]);
+            EnvironmentStatisticsProto evo = unityOutput.RlOutput.EnvironmentStatistics;
+            evo.FloatStat["pi"] = 3.14f;
+            evo.StringStat["pi"] = "Pi is for circles";
+            evo.FloatStat["goldrat"] = 1.1618f;
+            evo.StringStat["goldrat"] = "Goldrat is for growth";
+            evo.FloatStat["euler"] = 2.71828f;
+            evo.StringStat["euler"] = "Euler is for calculus";
+            Debug.Log("pi:" + unityOutput.RlOutput.EnvironmentStatistics.FloatStat["pi"]);
 
             rpclog.SaveMessageText("obs", unityOutput.ToString());
 # if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX

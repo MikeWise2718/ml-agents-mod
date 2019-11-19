@@ -9,6 +9,7 @@
 /UnitySDK/Assets/Plugins*
 /UnitySDK/Assets/Demonstrations*
 /UnitySDK/messages
+/UnitySDK/RpcMessages
 
 # Tensorflow Model Info
 /models

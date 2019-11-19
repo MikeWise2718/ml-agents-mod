@@ -9,7 +9,7 @@ import lgger as lgg
 
 from mlagents.envs.base_unity_environment import BaseUnityEnvironment
 from mlagents.envs.timers import timed, hierarchical_timer
-from .brain import AllBrainInfo, BrainInfo, BrainParameters
+from .brain import AllBrainInfo, BrainInfo, BrainParameters, EnvStats
 from .exception import (
     UnityEnvironmentException,
     UnityCommunicationException,
@@ -153,6 +153,10 @@ class UnityEnvironment(BaseUnityEnvironment):
     @property
     def external_brain_names(self):
         return self._external_brain_names
+
+    @property
+    def env_stats(self):
+        return self._env_stats
 
     @staticmethod
     def get_communicator(worker_id, base_port, timeout_wait):
@@ -631,20 +635,27 @@ class UnityEnvironment(BaseUnityEnvironment):
             _data[brain_name] = BrainInfo.from_agent_proto(
                 self.worker_id, agent_info_list, self.brains[brain_name]
             )
+        _data["EnvStats"] = EnvStats.from_proto(self.env_stats)
         return _data
 
     def _update_brain_parameters(self, output: UnityOutputProto) -> None:
         init_output = output.rl_initialization_output
-
+        lgg.info("_update_brain_parameters",lgg.cC)
         for brain_param in init_output.brain_parameters:
             # Each BrainParameter in the rl_initialization_output should have at least one AgentInfo
             # Get that agent, because we need some of its observations.
             agent_infos = output.rl_output.agentInfos[brain_param.brain_name]
+
             if agent_infos.value:
                 agent = agent_infos.value[0]
                 self._brains[brain_param.brain_name] = BrainParameters.from_proto(
                     brain_param, agent
                 )
+
+        env_stats = output.rl_output.environment_statistics
+        # self._env_stats = EnvStats.from_proto(env_stats)
+        lgg.info(f"env_stats:{output.rl_output.environment_statistics}",lgg.cC)
+        self._env_stats = env_stats.float_stat
         self._external_brain_names = list(self._brains.keys())
         self._num_external_brains = len(self._external_brain_names)
 

@@ -28,20 +28,20 @@ namespace MLAgents.CommunicatorObjects {
             "X291dHB1dC5wcm90bxIUY29tbXVuaWNhdG9yX29iamVjdHMaM21sYWdlbnRz",
             "L2VudnMvY29tbXVuaWNhdG9yX29iamVjdHMvYWdlbnRfaW5mby5wcm90bxo/",
             "bWxhZ2VudHMvZW52cy9jb21tdW5pY2F0b3Jfb2JqZWN0cy9lbnZpcm9ubWVu",
-            "dF9wYXJhbWV0ZXJzLnByb3RvIvUCChJVbml0eVJMT3V0cHV0UHJvdG8STAoK",
+            "dF9zdGF0aXN0aWNzLnByb3RvIvUCChJVbml0eVJMT3V0cHV0UHJvdG8STAoK",
             "YWdlbnRJbmZvcxgCIAMoCzI4LmNvbW11bmljYXRvcl9vYmplY3RzLlVuaXR5",
             "UkxPdXRwdXRQcm90by5BZ2VudEluZm9zRW50cnkSUAoWZW52aXJvbm1lbnRf",
-            "cGFyYW1ldGVycxgDIAEoCzIwLmNvbW11bmljYXRvcl9vYmplY3RzLkVudmly",
-            "b25tZW50UGFyYW1ldGVyc1Byb3RvGkkKEkxpc3RBZ2VudEluZm9Qcm90bxIz",
+            "c3RhdGlzdGljcxgDIAEoCzIwLmNvbW11bmljYXRvcl9vYmplY3RzLkVudmly",
+            "b25tZW50U3RhdGlzdGljc1Byb3RvGkkKEkxpc3RBZ2VudEluZm9Qcm90bxIz",
             "CgV2YWx1ZRgBIAMoCzIkLmNvbW11bmljYXRvcl9vYmplY3RzLkFnZW50SW5m",
             "b1Byb3RvGm4KD0FnZW50SW5mb3NFbnRyeRILCgNrZXkYASABKAkSSgoFdmFs",
             "dWUYAiABKAsyOy5jb21tdW5pY2F0b3Jfb2JqZWN0cy5Vbml0eVJMT3V0cHV0",
             "UHJvdG8uTGlzdEFnZW50SW5mb1Byb3RvOgI4AUoECAEQAkIfqgIcTUxBZ2Vu",
             "dHMuQ29tbXVuaWNhdG9yT2JqZWN0c2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::MLAgents.CommunicatorObjects.AgentInfoReflection.Descriptor, global::MLAgents.CommunicatorObjects.EnvironmentParametersReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::MLAgents.CommunicatorObjects.AgentInfoReflection.Descriptor, global::MLAgents.CommunicatorObjects.EnvironmentStatisticsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::MLAgents.CommunicatorObjects.UnityRLOutputProto), global::MLAgents.CommunicatorObjects.UnityRLOutputProto.Parser, new[]{ "AgentInfos", "EnvironmentParameters" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::MLAgents.CommunicatorObjects.UnityRLOutputProto.Types.ListAgentInfoProto), global::MLAgents.CommunicatorObjects.UnityRLOutputProto.Types.ListAgentInfoProto.Parser, new[]{ "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MLAgents.CommunicatorObjects.UnityRLOutputProto), global::MLAgents.CommunicatorObjects.UnityRLOutputProto.Parser, new[]{ "AgentInfos", "EnvironmentStatistics" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::MLAgents.CommunicatorObjects.UnityRLOutputProto.Types.ListAgentInfoProto), global::MLAgents.CommunicatorObjects.UnityRLOutputProto.Types.ListAgentInfoProto.Parser, new[]{ "Value" }, null, null, null),
             null, })
           }));
     }
@@ -75,7 +75,7 @@ namespace MLAgents.CommunicatorObjects {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UnityRLOutputProto(UnityRLOutputProto other) : this() {
       agentInfos_ = other.agentInfos_.Clone();
-      EnvironmentParameters = other.environmentParameters_ != null ? other.EnvironmentParameters.Clone() : null;
+      EnvironmentStatistics = other.environmentStatistics_ != null ? other.EnvironmentStatistics.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -94,14 +94,14 @@ namespace MLAgents.CommunicatorObjects {
       get { return agentInfos_; }
     }
 
-    /// <summary>Field number for the "environment_parameters" field.</summary>
-    public const int EnvironmentParametersFieldNumber = 3;
-    private global::MLAgents.CommunicatorObjects.EnvironmentParametersProto environmentParameters_;
+    /// <summary>Field number for the "environment_statistics" field.</summary>
+    public const int EnvironmentStatisticsFieldNumber = 3;
+    private global::MLAgents.CommunicatorObjects.EnvironmentStatisticsProto environmentStatistics_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::MLAgents.CommunicatorObjects.EnvironmentParametersProto EnvironmentParameters {
-      get { return environmentParameters_; }
+    public global::MLAgents.CommunicatorObjects.EnvironmentStatisticsProto EnvironmentStatistics {
+      get { return environmentStatistics_; }
       set {
-        environmentParameters_ = value;
+        environmentStatistics_ = value;
       }
     }
 
@@ -119,7 +119,7 @@ namespace MLAgents.CommunicatorObjects {
         return true;
       }
       if (!AgentInfos.Equals(other.AgentInfos)) return false;
-      if (!object.Equals(EnvironmentParameters, other.EnvironmentParameters)) return false;
+      if (!object.Equals(EnvironmentStatistics, other.EnvironmentStatistics)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -127,7 +127,7 @@ namespace MLAgents.CommunicatorObjects {
     public override int GetHashCode() {
       int hash = 1;
       hash ^= AgentInfos.GetHashCode();
-      if (environmentParameters_ != null) hash ^= EnvironmentParameters.GetHashCode();
+      if (environmentStatistics_ != null) hash ^= EnvironmentStatistics.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -142,9 +142,9 @@ namespace MLAgents.CommunicatorObjects {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       agentInfos_.WriteTo(output, _map_agentInfos_codec);
-      if (environmentParameters_ != null) {
+      if (environmentStatistics_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(EnvironmentParameters);
+        output.WriteMessage(EnvironmentStatistics);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -155,8 +155,8 @@ namespace MLAgents.CommunicatorObjects {
     public int CalculateSize() {
       int size = 0;
       size += agentInfos_.CalculateSize(_map_agentInfos_codec);
-      if (environmentParameters_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(EnvironmentParameters);
+      if (environmentStatistics_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(EnvironmentStatistics);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -170,11 +170,11 @@ namespace MLAgents.CommunicatorObjects {
         return;
       }
       agentInfos_.Add(other.agentInfos_);
-      if (other.environmentParameters_ != null) {
-        if (environmentParameters_ == null) {
-          environmentParameters_ = new global::MLAgents.CommunicatorObjects.EnvironmentParametersProto();
+      if (other.environmentStatistics_ != null) {
+        if (environmentStatistics_ == null) {
+          environmentStatistics_ = new global::MLAgents.CommunicatorObjects.EnvironmentStatisticsProto();
         }
-        EnvironmentParameters.MergeFrom(other.EnvironmentParameters);
+        EnvironmentStatistics.MergeFrom(other.EnvironmentStatistics);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -192,10 +192,10 @@ namespace MLAgents.CommunicatorObjects {
             break;
           }
           case 26: {
-            if (environmentParameters_ == null) {
-              environmentParameters_ = new global::MLAgents.CommunicatorObjects.EnvironmentParametersProto();
+            if (environmentStatistics_ == null) {
+              environmentStatistics_ = new global::MLAgents.CommunicatorObjects.EnvironmentStatisticsProto();
             }
-            input.ReadMessage(environmentParameters_);
+            input.ReadMessage(environmentStatistics_);
             break;
           }
         }

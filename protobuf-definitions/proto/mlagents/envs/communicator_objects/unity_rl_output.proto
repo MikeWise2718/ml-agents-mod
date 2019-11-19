@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 import "mlagents/envs/communicator_objects/agent_info.proto";
-import "mlagents/envs/communicator_objects/environment_parameters.proto";
+import "mlagents/envs/communicator_objects/environment_statistics.proto";
 
 option csharp_namespace = "MLAgents.CommunicatorObjects";
 package communicator_objects;
@@ -12,6 +12,6 @@ message UnityRLOutputProto {
     }
     reserved 1; // deprecated bool global_done field
     map<string, ListAgentInfoProto> agentInfos = 2;
-    EnvironmentParametersProto environment_parameters = 3;
+    EnvironmentStatisticsProto environment_statistics = 3;
 }
 

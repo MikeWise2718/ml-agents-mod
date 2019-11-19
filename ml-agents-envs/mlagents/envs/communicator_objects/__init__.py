@@ -9,6 +9,7 @@ from .custom_reset_parameters_pb2 import *
 from .demonstration_meta_pb2 import * 
 from .engine_configuration_pb2 import * 
 from .environment_parameters_pb2 import * 
+from .environment_statistics_pb2 import * 
 from .header_pb2 import * 
 from .space_type_pb2 import * 
 from .unity_input_pb2 import * 

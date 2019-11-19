@@ -4,6 +4,7 @@ import io
 
 from mlagents.envs.communicator_objects.agent_info_pb2 import AgentInfoProto
 from mlagents.envs.communicator_objects.brain_parameters_pb2 import BrainParametersProto
+from mlagents.envs.communicator_objects.environment_statistics_pb2 import EnvironmentStatisticsProto
 from mlagents.envs.timers import hierarchical_timer, timed
 from typing import Dict, List, NamedTuple, Optional
 from PIL import Image
@@ -20,6 +21,37 @@ class CameraResolution(NamedTuple):
     def gray_scale(self) -> bool:
         return self.num_channels == 1
 
+class EnvStats:
+    float_stat: Dict[str,float]
+    string_stat: Dict[str,str]
+    def __init__(
+        self,
+        float_stat:  Dict[str,float],
+        string_stat: Dict[str,str],
+    ):
+        """
+        Contains all EnvStats parameters.
+        """
+        self.float_stat = float_stat
+        self.string_stat = string_stat
+
+    def __str__(self):
+        return f"float_stat:{self.float_stat} str_stat:{self.string_stat}"
+
+    def from_proto(
+        env_stat_proto: EnvironmentStatisticsProto
+    ) -> "EnvStats":
+        """
+        Converts Environment Statistics parameter proto to EnvStats object.
+        :param env_stat_proto: protobuf object.
+        :return: EnvStats object.
+        """
+
+        env_stats = EnvStats(
+            env_stat_proto.float_stat,
+            env_stat_proto.string_stat,
+        )
+        return env_stats
 
 class BrainParameters:
     def __init__(
