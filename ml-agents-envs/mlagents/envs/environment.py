@@ -645,6 +645,7 @@ class UnityEnvironment(BaseUnityEnvironment):
             # Each BrainParameter in the rl_initialization_output should have at least one AgentInfo
             # Get that agent, because we need some of its observations.
             agent_infos = output.rl_output.agentInfos[brain_param.brain_name]
+            lgg.info(f"agent_infos[{brain_param.brain_name}]:{output.rl_output.agentInfos[brain_param.brain_name]}",lgg.cY)
 
             if agent_infos.value:
                 agent = agent_infos.value[0]
@@ -654,8 +655,11 @@ class UnityEnvironment(BaseUnityEnvironment):
 
         env_stats = output.rl_output.environment_statistics
         # self._env_stats = EnvStats.from_proto(env_stats)
-        lgg.info(f"env_stats:{output.rl_output.environment_statistics}",lgg.cC)
-        self._env_stats = env_stats.float_stat
+        lgg.info(f"env_stats:{env_stats}",lgg.cC)
+        lgg.info(f"type(env_stats):{type(env_stats)}",lgg.cC)
+        self._env_stats = env_stats
+        lgg.info(f"self._env_stats:{self._env_stats}",lgg.cM)
+        lgg.info(f"type(self._env_stats):{type(self._env_stats)}",lgg.cM)
         self._external_brain_names = list(self._brains.keys())
         self._num_external_brains = len(self._external_brain_names)
 

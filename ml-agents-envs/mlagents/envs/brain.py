@@ -8,6 +8,9 @@ from mlagents.envs.communicator_objects.environment_statistics_pb2 import Enviro
 from mlagents.envs.timers import hierarchical_timer, timed
 from typing import Dict, List, NamedTuple, Optional
 from PIL import Image
+import ujson
+import lgger as lgg
+
 
 logger = logging.getLogger("mlagents.envs")
 
@@ -32,12 +35,16 @@ class EnvStats:
         """
         Contains all EnvStats parameters.
         """
-        self.float_stat = float_stat
-        self.string_stat = string_stat
+        lgg.info(f"EnvStats constructor - floatstat:{float_stat}")
+        lgg.info(f"                     - type of floatstat:{type(float_stat)}")
+        lgg.info(f"                     - float_stat['pi']:{float_stat['pi']}")
+        self.float_stat = ujson.dumps(dict(float_stat))
+        self.string_stat = ujson.dumps(dict(string_stat))
 
     def __str__(self):
         return f"float_stat:{self.float_stat} str_stat:{self.string_stat}"
 
+    @staticmethod
     def from_proto(
         env_stat_proto: EnvironmentStatisticsProto
     ) -> "EnvStats":

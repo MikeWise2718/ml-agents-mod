@@ -9,6 +9,7 @@ from mlagents.trainers.buffer import Buffer
 #from buffer import Buffer
 from mlagents.trainers.trainer import Trainer, UnityTrainerException
 from mlagents.trainers.components.reward_signals import RewardSignalResult
+import ujson
 
 LOGGER = logging.getLogger("mlagents.trainers")
 
@@ -130,9 +131,10 @@ class RLTrainer(Trainer):
         if take_action_outputs:
             if "EnvStats" in curr_all_info:
                 env_stats = curr_all_info["EnvStats"]
-                for kk in env_stats.float_stat:
-                    vv = env_stats[kk]
-                    self.stats[kk].append(vv)
+                float_stat = ujson.loads(env_stats.float_stat)
+                for kk in float_stat:
+                    vv = float_stat[kk]
+                    self.stats["Custom/"+kk].append(vv)
             self.stats["Custom/Val1"].append(100)
             self.stats["Custom/Val2"].append(200)
             self.stats["Policy/Entropy"].append(take_action_outputs["entropy"].mean())
