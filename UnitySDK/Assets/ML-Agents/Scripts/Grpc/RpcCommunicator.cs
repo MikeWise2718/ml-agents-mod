@@ -351,13 +351,12 @@ namespace MLAgents
             Debug.Log("Exchange size:" + unityOutput.CalculateSize());
             var ai = unityOutput.RlOutput.AgentInfos;
             EnvironmentStatisticsProto evo = unityOutput.RlOutput.EnvironmentStatistics;
-            evo.FloatStat["pi"] = 3.14f;
+            evo.FloatStat["tb:Math1/pi"] = 3.14f;
             evo.StringStat["pi"] = "Pi is for circles";
-            evo.FloatStat["goldrat"] = 1.1618f;
+            evo.FloatStat["tb:Math1/goldrat"] = 1.618f;
             evo.StringStat["goldrat"] = "Goldrat is for growth";
-            evo.FloatStat["euler"] = 2.71828f;
+            evo.FloatStat["tb:Math1/euler"] = 2.71828f;
             evo.StringStat["euler"] = "Euler is for calculus";
-            Debug.Log("pi:" + unityOutput.RlOutput.EnvironmentStatistics.FloatStat["pi"]);
 
             rpclog.SaveMessageText("obs", unityOutput.ToString());
 # if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX

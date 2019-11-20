@@ -131,10 +131,13 @@ class RLTrainer(Trainer):
         if take_action_outputs:
             if "EnvStats" in curr_all_info:
                 env_stats = curr_all_info["EnvStats"]
-                float_stat = ujson.loads(env_stats.float_stat)
+                #float_stat = ujson.loads(env_stats.float_stat)
+                float_stat = env_stats.float_stat
                 for kk in float_stat:
-                    vv = float_stat[kk]
-                    self.stats["Custom/"+kk].append(vv)
+                    if kk.startswith("tb:"):
+                        vv = float_stat[kk]
+                        kkk = kk[3:]
+                        self.stats[kkk].append(vv)
             self.stats["Custom/Val1"].append(100)
             self.stats["Custom/Val2"].append(200)
             self.stats["Policy/Entropy"].append(take_action_outputs["entropy"].mean())

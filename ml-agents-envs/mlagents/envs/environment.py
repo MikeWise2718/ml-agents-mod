@@ -653,13 +653,9 @@ class UnityEnvironment(BaseUnityEnvironment):
                     brain_param, agent
                 )
 
-        env_stats = output.rl_output.environment_statistics
-        # self._env_stats = EnvStats.from_proto(env_stats)
-        lgg.info(f"env_stats:{env_stats}",lgg.cC)
-        lgg.info(f"type(env_stats):{type(env_stats)}",lgg.cC)
-        self._env_stats = env_stats
-        lgg.info(f"self._env_stats:{self._env_stats}",lgg.cM)
-        lgg.info(f"type(self._env_stats):{type(self._env_stats)}",lgg.cM)
+        self._env_stats = output.rl_output.environment_statistics
+        #lgg.info(f"self._env_stats:{self._env_stats}",lgg.cM)
+        #lgg.info(f"type(self._env_stats):{type(self._env_stats)}",lgg.cM)
         self._external_brain_names = list(self._brains.keys())
         self._num_external_brains = len(self._external_brain_names)
 

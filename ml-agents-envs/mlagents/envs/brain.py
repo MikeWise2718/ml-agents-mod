@@ -35,11 +35,8 @@ class EnvStats:
         """
         Contains all EnvStats parameters.
         """
-        lgg.info(f"EnvStats constructor - floatstat:{float_stat}")
-        lgg.info(f"                     - type of floatstat:{type(float_stat)}")
-        lgg.info(f"                     - float_stat['pi']:{float_stat['pi']}")
-        self.float_stat = ujson.dumps(dict(float_stat))
-        self.string_stat = ujson.dumps(dict(string_stat))
+        self.float_stat = dict(float_stat)
+        self.string_stat = dict(string_stat)
 
     def __str__(self):
         return f"float_stat:{self.float_stat} str_stat:{self.string_stat}"
@@ -53,7 +50,6 @@ class EnvStats:
         :param env_stat_proto: protobuf object.
         :return: EnvStats object.
         """
-
         env_stats = EnvStats(
             env_stat_proto.float_stat,
             env_stat_proto.string_stat,
