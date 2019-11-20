@@ -640,12 +640,12 @@ class UnityEnvironment(BaseUnityEnvironment):
 
     def _update_brain_parameters(self, output: UnityOutputProto) -> None:
         init_output = output.rl_initialization_output
-        lgg.info("_update_brain_parameters",lgg.cC)
+        lgg.verbose("_update_brain_parameters",lgg.cC)
         for brain_param in init_output.brain_parameters:
             # Each BrainParameter in the rl_initialization_output should have at least one AgentInfo
             # Get that agent, because we need some of its observations.
             agent_infos = output.rl_output.agentInfos[brain_param.brain_name]
-            lgg.info(f"agent_infos[{brain_param.brain_name}]:{output.rl_output.agentInfos[brain_param.brain_name]}",lgg.cY)
+            lgg.verbose(f"agent_infos[{brain_param.brain_name}]:{output.rl_output.agentInfos[brain_param.brain_name]}",lgg.cY)
 
             if agent_infos.value:
                 agent = agent_infos.value[0]

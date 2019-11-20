@@ -145,7 +145,8 @@ public class CmvAgentBody : MonoBehaviour
     // the distance of that hit is stored in the final float
     float rayDistance = 24f;
     float[] rayAngles = { 20f, 60f, 90f, 120f, 160f };
-    string[] detectableObjects = { "redGoal", "agent", "wall", "orangeBlock", "redBlock" };
+    //string[] detectableObjects = { "redGoal", "agent", "wall", "orangeBlock", "redBlock" };
+    string[] detectableObjects = { "redGoal", "agent", "wall", "wall" , "wall" };
 
     public List<float> Perceive()
     {
@@ -175,6 +176,10 @@ public class CmvAgentBody : MonoBehaviour
         if (col.gameObject.CompareTag("redGoal"))
         {
             parentAgent.ReachedGoal();
+        }
+        else if (col.gameObject.CompareTag("agent"))
+        {
+            parentAgent.RegisterCollision();
         }
     }
 

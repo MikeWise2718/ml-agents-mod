@@ -12,6 +12,7 @@ public class CmvAcademy : Academy {
     public Material failMaterial; // when fail, the ground will use this material for a few seconds. 
     public float gravityMultiplier; // use ~3 to make things less floaty
 
+    public int collisions;
     public int successes;
     public int failures;
     public int attempts;
@@ -32,12 +33,18 @@ public class CmvAcademy : Academy {
         totsteps += nsteps;
         avgsteps = totsteps * 1.0f / attempts;
     }
+    public void RegisterCollision()
+    {
+        collisions++;
+    }
 
     public override void AcademyStep()
     {
         envStatMan.AddFloatStat("CrowdMove/Attempts", attempts);
         envStatMan.AddFloatStat("CrowdMove/Successes", successes);
         envStatMan.AddFloatStat("CrowdMove/Failures", failures);
+        envStatMan.AddFloatStat("CrowdMove/Collisions", collisions);
+        envStatMan.AddFloatStat("CrowdMove/TotSteps", totsteps);
         envStatMan.AddFloatStat("CrowdMove/AvgSteps", avgsteps);
     }
 
@@ -55,9 +62,10 @@ public class CmvAcademy : Academy {
 
     public override void AcademyReset()
     {
+        attempts = 0;
         successes = 0;
         failures = 0;
-        attempts = 0;
+        collisions = 0;
         totsteps = 0;
         avgsteps = 0;
     }

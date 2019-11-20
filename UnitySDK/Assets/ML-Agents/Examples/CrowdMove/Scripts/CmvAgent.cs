@@ -20,7 +20,7 @@ public class CmvAgent : Agent
  
     Material groundMaterial;
     Renderer groundRenderer;
-    CmvAcademy academy;
+    public CmvAcademy academy;
     CmvAgMan cmvAgMan;
     public CmvAgentBody cmvagbod;
 
@@ -288,12 +288,12 @@ public class CmvAgent : Agent
             }
         }
         var forceVek = dirToGo * academy.agentRunSpeed;
-        var hitstring = cmvagbod.rpi.GetHitObs();
         var dist = Vector3.Magnitude(cube.transform.position - lastpos);
         var force = Vector3.Magnitude(forceVek);
         //Debug.Log("Move "+name+" "+sType+" rot:"+rotateDir.ToString("F1")+" force:"+forceVek.ToString("F3")+" hit:"+hits+" dst:"+dist.ToString("f1"));
         if (bannertmp!=null)
         {
+            var hitstring = cmvagbod.rpi.GetHitObs();
             bannertmp.text = name + "\n" + hitstring + "\n" +  hitFlashTimeMark.ToString("f1");
         }
         if (cube!=null)
@@ -343,6 +343,13 @@ public class CmvAgent : Agent
 
         //Debug.Log("Found goal - calling done in " + area.name + "   agent:" + name+" moves:"+nmoves);
         Done();
+    }
+    public void RegisterCollision()
+    {
+        SetReward(-1.0f);
+        academy.RegisterCollision();
+
+        //Debug.Log("Found goal - calling done in " + area.name + "   agent:" + name+" moves:"+nmoves);
     }
 
     public override void AgentReset()

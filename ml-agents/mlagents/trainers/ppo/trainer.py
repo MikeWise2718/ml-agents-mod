@@ -95,7 +95,7 @@ class PPOTrainer(RLTrainer):
         if self.is_training:
             self.policy.update_normalization(info.vector_observations)
         for l in range(len(info.agents)):
-            lgg.info(f"  process_experiences for agent {l}",lgg.cR)   
+            lgg.verbose(f"  process_experiences for agent {l}",lgg.cR)   
             agent_actions = self.training_buffer[info.agents[l]]["actions"]
             if (
                 info.local_done[l]
