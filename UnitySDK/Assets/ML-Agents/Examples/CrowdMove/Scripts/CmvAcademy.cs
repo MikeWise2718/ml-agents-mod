@@ -18,6 +18,7 @@ public class CmvAcademy : Academy {
     public int attempts;
     public int totsteps;
     public float avgsteps;
+    public int timeDelayMsecs;
 
     public void RegisterSuccess(int nsteps)
     {
@@ -46,6 +47,10 @@ public class CmvAcademy : Academy {
         envStatMan.AddFloatStat("CrowdMove/Collisions", collisions);
         envStatMan.AddFloatStat("CrowdMove/TotSteps", totsteps);
         envStatMan.AddFloatStat("CrowdMove/AvgSteps", avgsteps);
+        if (timeDelayMsecs>0)
+        {
+            System.Threading.Thread.Sleep(timeDelayMsecs);
+        }
     }
 
 

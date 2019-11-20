@@ -314,7 +314,7 @@ public class CmvAgent : Agent
                 var lamb = stepCount / (1.0f * this.agentParameters.maxStep);
                 c = Color.Lerp(c1, c2, lamb);
             }
-            //GraphAlgos.GraphUtil.SetColorOfGo(cube,c);
+            CmvAgentBody.SetColorOfGo(cube,c);
         }
         //cmvagbod.rpi.DumpRays();
         cmvagbod.AddMovement(rotateDir,forceVek, ForceMode.VelocityChange);

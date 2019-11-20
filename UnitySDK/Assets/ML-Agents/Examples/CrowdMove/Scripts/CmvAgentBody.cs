@@ -182,7 +182,25 @@ public class CmvAgentBody : MonoBehaviour
             parentAgent.RegisterCollision();
         }
     }
+    static Shader transShader = null;
+    public static void SetColorOfGo(GameObject go, Color cclr)
+    {
 
+        var mat = go.GetComponent<Renderer>().material;
+        if (cclr.a < 1f)
+        {
+
+            if (transShader == null)
+            {
+                transShader = Shader.Find("Transparent/Diffuse");
+            }
+            if (transShader != null)
+            {
+                mat.shader = transShader;
+            }
+        }
+        mat.SetColor("_Color", cclr);
+    }
     // Update is called once per frame
     void Update()
     {
