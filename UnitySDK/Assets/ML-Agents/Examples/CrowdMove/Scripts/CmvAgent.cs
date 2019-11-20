@@ -28,7 +28,7 @@ public class CmvAgent : Agent
     int nmoves;
     public TextMeshPro bannertmp = null;
     public GameObject bannergo = null;
-    public GameObject cube = null;
+    public GameObject avatar = null;
     public bool showStartMarker = false;
     public SpaceType sType = SpaceType.Continuous;
 
@@ -48,10 +48,16 @@ public class CmvAgent : Agent
         useVectorObs = true;
 
         // Create body
-        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.name = "body";
-        cube.transform.parent = transform;
-        cmvagbod = cube.AddComponent<CmvAgentBody>();
+        avatar = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        avatar.name = "body";
+        avatar.transform.parent = transform;
+        cmvagbod = avatar.AddComponent<CmvAgentBody>();
+        var visor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        visor.transform.parent = avatar.transform;
+        visor.transform.localScale = new Vector3(0.95f, 0.25f, 0.5f);
+        visor.transform.position   = new Vector3(0,   0.5f, -0.25f);
+        CmvAgentBody.SetColorOfGo(visor, Color.black);
+
         cmvagbod.Init(this);
         //var bhp = GetComponent<BehaviorParameters>();
         //bhp.m_BehaviorName = "CrowdMove";
@@ -205,7 +211,7 @@ public class CmvAgent : Agent
     }
     public Vector3 GetPos()
     {
-        return cube.transform.position;
+        return avatar.transform.position;
     }
 
     IEnumerator GoalScoredSwapGroundMaterial(Material mat, float time)
@@ -261,8 +267,8 @@ public class CmvAgent : Agent
 
         Vector3 dirToGo = Vector3.zero;
         Vector3 rotateDir = Vector3.zero;
-        Vector3 fwdDir = cube.transform.forward;
-        Vector3 upDir = cube.transform.up;
+        Vector3 fwdDir = avatar.transform.forward;
+        Vector3 upDir = avatar.transform.up;
         if (sType== SpaceType.Continuous)
         {
             dirToGo = fwdDir * Mathf.Clamp(act[0], -1f, 1f);
@@ -288,7 +294,7 @@ public class CmvAgent : Agent
             }
         }
         var forceVek = dirToGo * academy.agentRunSpeed;
-        var dist = Vector3.Magnitude(cube.transform.position - lastpos);
+        var dist = Vector3.Magnitude(avatar.transform.position - lastpos);
         var force = Vector3.Magnitude(forceVek);
         //Debug.Log("Move "+name+" "+sType+" rot:"+rotateDir.ToString("F1")+" force:"+forceVek.ToString("F3")+" hit:"+hits+" dst:"+dist.ToString("f1"));
         if (bannertmp!=null)
@@ -296,7 +302,7 @@ public class CmvAgent : Agent
             var hitstring = cmvagbod.rpi.GetHitObs();
             bannertmp.text = name + "\n" + hitstring + "\n" +  hitFlashTimeMark.ToString("f1");
         }
-        if (cube!=null)
+        if (avatar!=null)
         {
             Color c = c0;
             var stepCount = GetStepCount();
@@ -314,12 +320,12 @@ public class CmvAgent : Agent
                 var lamb = stepCount / (1.0f * this.agentParameters.maxStep);
                 c = Color.Lerp(c1, c2, lamb);
             }
-            CmvAgentBody.SetColorOfGo(cube,c);
+            CmvAgentBody.SetColorOfGo(avatar,c);
         }
         //cmvagbod.rpi.DumpRays();
         cmvagbod.AddMovement(rotateDir,forceVek, ForceMode.VelocityChange);
         cmvagbod.SyncToBody(bannergo);
-        lastpos = cube.transform.position;
+        lastpos = avatar.transform.position;
         nmoves++;
     }
 

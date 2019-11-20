@@ -144,14 +144,25 @@ public class CmvAgentBody : MonoBehaviour
     // then a one added if nothing was hit (to make it easier
     // the distance of that hit is stored in the final float
     float rayDistance = 24f;
-    float[] rayAngles = { 20f, 60f, 90f, 120f, 160f };
+    float[] iniRayAngles = { 20f, 60f, 90f, 120f, 160f };
+    float rayAngleOffset = -180;
+    float[] rayAngles;
     //string[] detectableObjects = { "redGoal", "agent", "wall", "orangeBlock", "redBlock" };
     string[] detectableObjects = { "redGoal", "agent", "wall", "wall" , "wall" };
 
+    void initRayAngles()
+    {
+        rayAngles = new float[iniRayAngles.Length];
+        for( int i=0; i<iniRayAngles.Length; i++)
+        {
+            rayAngles[i] = iniRayAngles[i] + rayAngleOffset;
+        }
+    }
     public List<float> Perceive()
     {
         if (rpi == null)
         {
+            initRayAngles();
             rpi = new RayPerceptionInterpreter(name, rayDistance, rayAngles, detectableObjects);
         }
         if (rayPer==null)
