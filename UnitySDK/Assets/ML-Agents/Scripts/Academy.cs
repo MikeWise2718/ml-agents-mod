@@ -106,6 +106,8 @@ namespace MLAgents
         /// Used to restore original value when deriving Academy modifies it
         private float m_OriginalMaximumDeltaTime;
 
+        public EnvStatMan envStatMan = new EnvStatMan();
+
         // Fields provided in the Inspector
 
         [FormerlySerializedAs("maxSteps")]
@@ -263,6 +265,8 @@ namespace MLAgents
             m_OriginalGravity = Physics.gravity;
             m_OriginalFixedDeltaTime = Time.fixedDeltaTime;
             m_OriginalMaximumDeltaTime = Time.maximumDeltaTime;
+
+            envStatMan.Reset();
 
             InitializeAcademy();
             var port  = 5004;

@@ -1,5 +1,7 @@
 # # Unity ML-Agents Toolkit
 import logging
+import lgger as lgg
+
 from typing import Dict, List, Any, NamedTuple
 import numpy as np
 
@@ -9,7 +11,6 @@ from mlagents.trainers.buffer import Buffer
 #from buffer import Buffer
 from mlagents.trainers.trainer import Trainer, UnityTrainerException
 from mlagents.trainers.components.reward_signals import RewardSignalResult
-import ujson
 
 LOGGER = logging.getLogger("mlagents.trainers")
 
@@ -137,9 +138,8 @@ class RLTrainer(Trainer):
                     if kk.startswith("tb:"):
                         vv = float_stat[kk]
                         kkk = kk[3:]
+                        lgg.info(f"tb  - adding {kkk} val:{vv}",lgg.cIG)
                         self.stats[kkk].append(vv)
-            self.stats["Custom/Val1"].append(100)
-            self.stats["Custom/Val2"].append(200)
             self.stats["Policy/Entropy"].append(take_action_outputs["entropy"].mean())
             self.stats["Policy/Entropy2"].append(2*take_action_outputs["entropy"].mean())
             self.stats["Policy/Learning Rate"].append(

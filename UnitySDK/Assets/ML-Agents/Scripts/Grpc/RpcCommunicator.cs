@@ -291,6 +291,18 @@ namespace MLAgents
             {
                 message.RlInitializationOutput = tempUnityRlInitializationOutput;
             }
+            EnvironmentStatisticsProto evo = message.RlOutput.EnvironmentStatistics;
+            var aca = GameObject.FindObjectOfType<Academy>();
+            aca.envStatMan.FillFloatMapField(evo.FloatStat);
+            aca.envStatMan.FillStringMapField(evo.StringStat);
+            aca.envStatMan.Reset();
+            //evo.FloatStat["tb:Math1/pi"] = 3.14f;
+            //evo.StringStat["pi"] = "Pi is for circles";
+            //evo.FloatStat["tb:Math1/goldrat"] = 1.618f;
+            //evo.StringStat["goldrat"] = "Goldrat is for growth";
+            //evo.FloatStat["tb:Math1/euler"] = 2.71828f;
+            //evo.StringStat["euler"] = "Euler is for calculus";
+
             var input = Exchange(message);
             UpdateSentBrainParameters(tempUnityRlInitializationOutput);
 
@@ -348,15 +360,16 @@ namespace MLAgents
         /// <param name="unityOutput">The UnityOutput to be sent.</param>
         private UnityInputProto Exchange(UnityOutputProto unityOutput)
         {
-            Debug.Log("Exchange size:" + unityOutput.CalculateSize());
-            var ai = unityOutput.RlOutput.AgentInfos;
-            EnvironmentStatisticsProto evo = unityOutput.RlOutput.EnvironmentStatistics;
-            evo.FloatStat["tb:Math1/pi"] = 3.14f;
-            evo.StringStat["pi"] = "Pi is for circles";
-            evo.FloatStat["tb:Math1/goldrat"] = 1.618f;
-            evo.StringStat["goldrat"] = "Goldrat is for growth";
-            evo.FloatStat["tb:Math1/euler"] = 2.71828f;
-            evo.StringStat["euler"] = "Euler is for calculus";
+            //Debug.Log("Exchange size:" + unityOutput.CalculateSize());
+            //var ai = unityOutput.RlOutput.AgentInfos;
+
+            //EnvironmentStatisticsProto evo = unityOutput.RlOutput.EnvironmentStatistics;
+            //evo.FloatStat["tb:Math1/pi"] = 3.14f;
+            //evo.StringStat["pi"] = "Pi is for circles";
+            //evo.FloatStat["tb:Math1/goldrat"] = 1.618f;
+            //evo.StringStat["goldrat"] = "Goldrat is for growth";
+            //evo.FloatStat["tb:Math1/euler"] = 2.71828f;
+            //evo.StringStat["euler"] = "Euler is for calculus";
 
             rpclog.SaveMessageText("obs", unityOutput.ToString());
 # if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX

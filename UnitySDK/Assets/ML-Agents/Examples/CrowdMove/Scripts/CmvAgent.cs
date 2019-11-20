@@ -32,6 +32,8 @@ public class CmvAgent : Agent
     public bool showStartMarker = false;
     public SpaceType sType = SpaceType.Continuous;
 
+
+
     public void SetupAgent(CmvAgMan cmvAgMan)
     {
         this.cmvAgMan = cmvAgMan;
@@ -337,12 +339,18 @@ public class CmvAgent : Agent
     {
         SetReward(5.0f);
         StartCoroutine(GoalScoredSwapGroundMaterial(academy.goalScoredMaterial, 1.0f));
+        academy.RegisterSuccess(this.nmoves);
+
         //Debug.Log("Found goal - calling done in " + area.name + "   agent:" + name+" moves:"+nmoves);
         Done();
     }
 
     public override void AgentReset()
     {
+        if (nmoves>0)
+        {
+            academy.RegisterFailure(this.nmoves);
+        }
         //Debug.Log("AgentReset in " + area.name + " for:" + name+"  nmoves:"+nmoves);
         float agentOffset = -15f;
 

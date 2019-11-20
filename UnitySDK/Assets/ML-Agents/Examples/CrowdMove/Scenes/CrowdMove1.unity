@@ -636,11 +636,16 @@ MonoBehaviour:
     targetFrameRate: 60
   resetParameters:
     m_ResetParameters: []
-  agentRunSpeed: 0
+  agentRunSpeed: 0.5
   agentRotationSpeed: 0
   goalScoredMaterial: {fileID: 0}
   failMaterial: {fileID: 0}
   gravityMultiplier: 0
+  successes: 0
+  failures: 0
+  attempts: 0
+  totsteps: 0
+  avgsteps: 0
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0
@@ -723,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
@@ -810,7 +815,7 @@ PrefabInstance:
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
       propertyPath: nagents
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8302501480183251489, guid: 076ea380b3b0a5043a2a689676e387f2,
         type: 3}
