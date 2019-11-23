@@ -740,7 +740,7 @@ MonoBehaviour:
   attempts: 0
   totsteps: 0
   avgsteps: 0
-  timeDelayMsecs: 0
+  timeDelayMsecs: 200
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0
