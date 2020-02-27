@@ -53,6 +53,8 @@ public class CmvAgent : Agent
         avatar.transform.parent = transform;
         cmvagbod = avatar.AddComponent<CmvAgentBody>();
         var visor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        var clder = visor.GetComponent<Collider>();
+        clder.enabled = false;
         visor.transform.parent = avatar.transform;
         visor.transform.localScale = new Vector3(0.95f, 0.25f, 0.5f);
         visor.transform.position   = new Vector3(0,   0.5f, -0.25f);
@@ -200,7 +202,7 @@ public class CmvAgent : Agent
     int ncollected = 0;
     public override void CollectObservations()
     {
-        Debug.Log("Collecting observations for " + name + " useVectorobs:" + useVectorObs+" ncollected:"+ncollected);
+        //Debug.Log("Collecting observations for " + name + " useVectorobs:" + useVectorObs+" ncollected:"+ncollected);
         if (useVectorObs)
         {
             AddVectorObs(GetStepCount() / (float)agentParameters.maxStep);
@@ -296,7 +298,7 @@ public class CmvAgent : Agent
         var forceVek = dirToGo * academy.agentRunSpeed;
         var dist = Vector3.Magnitude(avatar.transform.position - lastpos);
         var force = Vector3.Magnitude(forceVek);
-        //Debug.Log("Move "+name+" "+sType+" rot:"+rotateDir.ToString("F1")+" force:"+forceVek.ToString("F3")+" hit:"+hits+" dst:"+dist.ToString("f1"));
+        //Debug.Log("Move "+name+" "+sType+" rot:"+rotateDir.ToString("F1")+" force:"+forceVek.ToString("F3")+" dst:"+dist.ToString("f1"));
         if (bannertmp!=null)
         {
             var hitstring = cmvagbod.rpi.GetHitObs();

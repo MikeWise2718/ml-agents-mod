@@ -17,10 +17,17 @@ public class CmvAgentBody : MonoBehaviour
     {
         this.parentAgent = parentAgent;
         rb = gameObject.AddComponent<Rigidbody>();
+        //rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionY;
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         rb.mass = 25;
         rb.drag = 2;
-        gameObject.tag = "agent";
+        var tag = "agent";
+        gameObject.tag = tag;
+        for(int i=0; i<transform.childCount; i++)
+        {
+            var child = transform.GetChild(i);
+            child.tag = tag;
+        }
     }
     public void InitializeAgentBody()
     {
@@ -70,13 +77,15 @@ public class CmvAgentBody : MonoBehaviour
             rayHit = new Dictionary<float, string>();
             rayHitDist = new Dictionary<float, float>();
         }
-        public void Perceive(List<float> values)
+        public bool Perceive(List<float> values)
         {
+            var ok = true;
             InitDicts();
             if (values.Count != pbufSize)
             {
-                Debug.LogError(aname + " bad perceivebuffer of length:" + values.Count + " expected:" + pbufSize);
-                return;
+                ok = false;
+                Debug.LogError($"{aname} bad perceivebuffer of length:{values.Count} expected:{pbufSize}");
+                return ok;
             }
             int i = 0;
             foreach (var rang in rayAngles)
@@ -95,16 +104,19 @@ public class CmvAgentBody : MonoBehaviour
                 }
                 if (hitcls != "" && values[i] == 1)
                 {
-                    Debug.LogError(aname + " perceivebuffer inconsistency for ray-ang:" + rang + " hitcls:" + hitcls + " but coded to not hit");
+                    ok = false;
+                    Debug.LogError($"{aname} perceivebuffer inconsistency for ray-ang:{rang} hitcls:{hitcls} but coded to not hit");
                 }
                 else if (hitcls == "" && values[i] == 0)
                 {
-                    Debug.LogError(aname + " perceivebuffer inconsistency for ray-ang:" + rang + " hitcls empty:" + hitcls + " but coded to a hit");
+                    ok = false;
+                    Debug.LogError($"{aname} perceivebuffer inconsistency for ray-ang:{rang} hitcls empty but code to a hit - maybe hit untagged object");
                 }
                 i++;
                 rayHitDist[rang] = rayDistance * values[i];
                 i++;
             }
+            return ok;
         }
         public bool HitDetected(string cls)
         {
@@ -169,8 +181,13 @@ public class CmvAgentBody : MonoBehaviour
         {
             InitializeAgentBody();
         }
-        var rayobs = rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0,0);
-        rpi.Perceive(rayobs);
+        var rayobs = rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0, 0);
+        var ok = rpi.Perceive(rayobs);
+        if (!ok)
+        {
+            // try again for debugger
+            rayobs = rayPer.Perceive(rayDistance, rayAngles, detectableObjects, 0, 0);
+        }
         return rayobs;
     }
     public void SyncToBody(GameObject go)
