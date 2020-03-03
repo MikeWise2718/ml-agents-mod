@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 using TMPro;
+using Barracuda;
 
 public class CmvAgent : Agent
 {
@@ -91,10 +92,16 @@ public class CmvAgent : Agent
     }
     public void SetupAgentSpaceType(SpaceType reqstype)
     {
-        var bhp = GetComponent<BehaviorParameters>();
-        bhp.m_BehaviorName = "CrowdMove";
+        var bbp = GetComponent<Behaviour>();
+        var bphp = GetComponent<BehaviorParameters>();
+        bphp.m_BehaviorName = "CrowdMove";
         //bhp.m_UseHeuristic = true;
-        var bp = bhp.brainParameters;
+        var fname = "CrowdMove.nn";
+        var bbpath = "Assets/ML-Agents/Examples/CrowdMove/TFModels/"+fname;
+        var model = System.IO.File.ReadAllBytes(bbpath);
+        bphp.m_Model = ScriptableObject.CreateInstance<NNModel>();
+        bphp.m_Model.Value = model;
+        var bp = bphp.brainParameters;
         bp.vectorActionSpaceType = reqstype;
         this.sType = reqstype;
         switch (reqstype)
@@ -113,7 +120,7 @@ public class CmvAgent : Agent
                     bp.vectorActionDescriptions = new string[] { "rotate-right", "rotate-left", "move-forward", "move-backward" };
                     break;
                 }
-        }
+        }       
     }
     public override void InitializeAgent()
     {
